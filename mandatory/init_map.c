@@ -12,31 +12,6 @@
 
 #include "../cub3D.h"
 
-void    init_play_pos(char **map)
-{
-    int i;
-    int j;
-
-    i = 0;
-    while (map[i])
-    {
-        j = 0;
-        while (map[i][j])
-        {
-
-            if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E' || map[i][j] == 'W')
-            {
-                g_player.x = j;
-                g_player.y = i;
-                g_player.dir = map[i][j];
-                map[i][j] = '0';
-            }
-            j++;
-        }
-        i++;
-    } 
-}
-
 void    init_window(void)
 {
     g_mlx.mlx_ptr = mlx_init();

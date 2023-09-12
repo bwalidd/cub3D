@@ -47,13 +47,16 @@ int main(int ac, char **av)
 {
   
     char **map;
+    t_player *player;
+
     if (ac < 2)
         return (0);
     if (parse_map(av[1]) == 0)
         return (1);
+    player = malloc(sizeof(t_player*));
     map = split_map(av[1]);
-    init_player_pos(map);
+    init_player_pos(map, player);
     init_window();
-    draw__mlx_map(map, g_mlx.win_ptr, g_mlx.mlx_ptr);
+    draw_mlx_map(map, g_mlx.win_ptr, g_mlx.mlx_ptr);
     return (0);
 }
