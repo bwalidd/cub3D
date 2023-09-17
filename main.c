@@ -6,7 +6,7 @@
 /*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 20:47:58 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/09/16 12:56:26 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/09/17 10:50:37 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int main(int ac, char **av)
     fill_map_info(map_info,av);
     g_mlx = malloc(sizeof(t_mlx));
     init_window(g_mlx,map_info);
-    draw_mlx_map(map_info->map, g_mlx);
+    draw_mlx_map(map_info->map, g_mlx,map_info);
     init_player_pos(map_info->map, player,g_mlx);
     mlx_loop(g_mlx->mlx_ptr);
     return (0);

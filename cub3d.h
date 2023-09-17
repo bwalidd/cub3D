@@ -6,7 +6,7 @@
 /*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 20:48:43 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/09/16 12:55:42 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/09/17 10:57:15 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,14 @@ typedef struct	s_mlx
 {
     void	*mlx_ptr;
     void	*win_ptr;
+    int bits_per_pixel;
+    int size_line;
+    int endian;
 }				t_mlx;
 
 
 void    init_window(t_mlx *g_mlx,t_map_size *map_info);
-void    draw_mlx_map(char **map, t_mlx *g_mlx);
+void    draw_mlx_map(char **map, t_mlx *g_mlx,t_map_size *map_info);
 void    init_player(t_player *player);
 void    init_player_pos(char **map,t_player *player,t_mlx *g_mlx);
 void    draw_player(t_mlx *g_mlx, int x, int y);
