@@ -6,7 +6,7 @@
 #    By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/12 20:28:46 by wbouwach          #+#    #+#              #
-#    Updated: 2023/09/15 19:33:53 by wbouwach         ###   ########.fr        #
+#    Updated: 2023/09/17 11:36:02 by wbouwach         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 
 LINKS = -L/usr/local/lib -lmlx -lX11 -lXext -lm
 
-SRC = main.c init_map.c init_player.c \
+SRC = main.c init_map.c init_player.c player_movements.c\
 	get_next_line/get_next_line.c get_next_line/get_next_line_utils.c
 
 OBJ = $(SRC:.c=.o)

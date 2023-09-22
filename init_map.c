@@ -6,7 +6,7 @@
 /*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 21:08:37 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/09/17 11:07:25 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/09/17 11:08:43 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,6 @@ void    init_window(t_mlx *g_mlx,t_map_size *map_info)
     g_mlx->mlx_ptr = mlx_init();
     g_mlx->win_ptr = mlx_new_window(g_mlx->mlx_ptr, map_info->len_of_line * TILE_SIZE, map_info->num_of_lines * TILE_SIZE, "Cub3D");
 }
-/*
-static void fill_rectangle(t_mlx *g_mlx, int x, int y, int width, int height, int color)
-{
-    int rect_x = 0;
-    while (rect_x < width)
-    {
-        int rect_y = 0;
-        while (rect_y < height)
-        {
-            mlx_pixel_put(g_mlx->mlx_ptr, g_mlx->win_ptr, x + rect_x, y + rect_y, color);
-            rect_y++;
-        }
-        rect_x++;
-    }
-}*/
 
 void draw_mlx_map(char **map, t_mlx *g_mlx,t_map_size *map_info)
 {

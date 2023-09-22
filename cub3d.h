@@ -6,7 +6,7 @@
 /*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 20:48:43 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/09/17 10:57:15 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/09/22 15:46:38 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@
 # include "get_next_line/get_next_line.h"
 
 
-# define KEY_W 13
-# define KEY_S 1
-# define KEY_A 0
-# define KEY_D 2
-# define KEY_LEFT 123
-# define KEY_RIGHT 124
+# define KEY_W 'w'
+# define KEY_S 's'
+# define KEY_A 'a'
+# define KEY_D 'd'
+# define KEY_DOWN  65364
+# define KEY_LEFT  65361
+# define KEY_RIGHT 65363
+# define KEY_UP 65362
 # define KEY_ESC 53
 # define PI 3.14
 # define TILE_SIZE 40
@@ -34,43 +36,48 @@
 # define FOV_ANGLE (60 * (PI / 180)) // this is the field of view angle by radian
 # define NUM_RAYS WINDOW_WIDTH
 
-typedef struct	s_player
-{
-    int		x;
-    int		y;
-    int		dir;
-    int     circle_radius;
-    int     turn_direction;
-    int     walk_direction;
-    float		rotation_angle;
-    float		walk_speed;
-    float		turn_speed;
-}				t_player;
 
 typedef struct s_map_size
 {
     char **map;
     int num_of_lines;
     int len_of_line;    
-}       t_map_size;
+} t_map_size;
 
-
-typedef struct	s_mlx
+typedef struct s_mlx
 {
-    void	*mlx_ptr;
-    void	*win_ptr;
+    void *mlx_ptr;
+    void *win_ptr;
     int bits_per_pixel;
     int size_line;
     int endian;
-}				t_mlx;
+} t_mlx;
 
+typedef struct s_player
+{
+    float x;
+    float y;
+    int dir;
+    int circle_radius;
+    int turn_direction;
+    int walk_direction;
+    float rotation_angle;
+    float walk_speed;
+    float     target_x;
+    float     pixel_x;
+    float      pixel_y;
+    float     target_y;
+    float turn_speed;
+    t_map_size *map_info;
+    t_mlx *g_mlx;
+} t_player;
 
-void    init_window(t_mlx *g_mlx,t_map_size *map_info);
-void    draw_mlx_map(char **map, t_mlx *g_mlx,t_map_size *map_info);
-void    init_player(t_player *player);
-void    init_player_pos(char **map,t_player *player,t_mlx *g_mlx);
-void    draw_player(t_mlx *g_mlx, int x, int y);
-//void    draw_line(void *win_ptr, void *mlx_ptr, int x1, int y1, int x2, int y2);
-//void    draw_player(void *win_ptr, void *mlx_ptr, int x, int y);
+void init_window(t_mlx *g_mlx, t_map_size *map_info);
+void draw_mlx_map(char **map, t_mlx *g_mlx, t_map_size *map_info);
+void init_player(t_player *player, t_map_size *infos, t_mlx *g_mlx);
+void init_player_pos(char **map, t_player *player, t_mlx *g_mlx, t_map_size *infos);
+void draw_player(t_mlx *g_mlx, t_player *player);
+void update_player(t_mlx *g_mlx, t_player *player);
+int key_press_hook(int keycode, t_player *player);
 
 #endif
