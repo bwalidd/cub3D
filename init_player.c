@@ -6,7 +6,7 @@
 /*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:52:08 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/09/22 16:06:16 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/09/25 21:18:51 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ void draw_player(t_mlx *g_mlx, t_player *player)
     float j;
 
     i = map_x * TILE_SIZE;
-    while (i < (map_x * TILE_SIZE + TILE_SIZE / 4))
+    while (i < (map_x * TILE_SIZE + TILE_SIZE / 40))
     {
         j = map_y * TILE_SIZE;
-        while (j < (map_y * TILE_SIZE + TILE_SIZE / 4))
+        while (j < (map_y * TILE_SIZE + TILE_SIZE / 40))
         {
             mlx_pixel_put(g_mlx->mlx_ptr, g_mlx->win_ptr, i, j, 0x00FFFF00);
             j++;
