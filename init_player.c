@@ -6,7 +6,7 @@
 /*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:52:08 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/09/25 21:18:51 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/09/28 17:52:45 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void    init_player_pos(char **map,t_player *player,t_mlx *g_mlx,t_map_size *inf
     //mlx_pixel_put(g_mlx->mlx_ptr,g_mlx->win_ptr,800,890,0xFFFF0000);
     init_player(player,infos, g_mlx);
     draw_player(g_mlx, player);
+    
 }
 
 void init_player(t_player *player,t_map_size *infos,t_mlx *g_mlx)
@@ -46,10 +47,10 @@ void init_player(t_player *player,t_map_size *infos,t_mlx *g_mlx)
     player->map_info = infos;
     player->g_mlx = g_mlx;
     player->circle_radius = 3;
-    player->rotation_angle = PI / 8;
+    player->rotation_angle = PI / 2;
     player->walk_speed = 0.5;
     player->turn_speed = 2 * (PI / 180);
-    player->turn_direction = 0;
+    player->turn_direction = 1;
     player->walk_direction = 1;
 }
 /*
@@ -72,6 +73,38 @@ void draw_line(void *win_ptr, void *mlx_ptr, int x1, int y1, int x2, int y2)
 }
 */
 
+void draw_line(t_mlx *g_mlx, t_player *player)
+{
+    float x1 = player->pixel_x;
+    float y1 = player->pixel_y;
+    float x2 = x1 + cos(player->rotation_angle) * 40;
+    float y2 = y1 + sin(player->rotation_angle) * 40;
+
+    float dx = fabs(x2 - x1);
+    float dy = fabs(y2 - y1);
+
+    int steps;
+    if (dx > dy)
+        steps = round(dx);
+    else
+        steps = round(dy);
+
+    float x_increment = (x2 - x1) / steps;
+    float y_increment = (y2 - y1) / steps;
+
+    float x = x1;
+    float y = y1;
+
+    int i = 0;
+    while (i < steps)
+    {
+        mlx_pixel_put(g_mlx->mlx_ptr, g_mlx->win_ptr, round(x), round(y), 0x00FF0000);
+        x += x_increment;
+        y += y_increment;
+        i++;
+    }
+}
+
 void draw_player(t_mlx *g_mlx, t_player *player)
 {
     // Convert pixel coordinates to map coordinates
@@ -92,4 +125,6 @@ void draw_player(t_mlx *g_mlx, t_player *player)
         }
         i++;
     }
+    draw_line(g_mlx, player);
 }
+

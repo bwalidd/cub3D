@@ -6,7 +6,7 @@
 /*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 20:48:43 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/09/22 15:46:38 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/09/28 14:51:31 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 # include <math.h>
 # include <stdio.h>
+# include <math.h>
 # include "mlx.h"
 # include <stdlib.h>
 # include "get_next_line/get_next_line.h"
@@ -79,5 +80,6 @@ void init_player_pos(char **map, t_player *player, t_mlx *g_mlx, t_map_size *inf
 void draw_player(t_mlx *g_mlx, t_player *player);
 void update_player(t_mlx *g_mlx, t_player *player);
 int key_press_hook(int keycode, t_player *player);
+void draw_line(t_mlx *g_mlx, t_player *player);
 
 #endif
