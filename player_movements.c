@@ -6,7 +6,7 @@
 /*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 11:18:41 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/09/28 17:48:31 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/09/28 22:20:17 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,37 +58,55 @@ void rotate_player(t_player *player, int keycode)
 int key_press_hook(int keycode, t_player *player)
 {
     float move_step = 1; // Adjust this for smoother/faster movement
+    float rotation_step = 0.1; // Adjust this for smoother/faster rotation
 
-    if (keycode == 'w')
-    {
-        if (can_move(player->map_info->map, player->pixel_x, player->pixel_y - move_step - 1, move_step, player))
-        {
-            player->pixel_y -= move_step;
+    if (keycode == 'w') {
+        // Calculate the movement in both x and y directions based on the rotation angle
+        float move_x = cos(player->rotation_angle) * move_step;
+        float move_y = sin(player->rotation_angle) * move_step;
+
+        if (can_move(player->map_info->map, player->pixel_x + move_x, player->pixel_y + move_y, move_step, player)) {
+            player->pixel_x += move_x;
+            player->pixel_y += move_y;
+        }
+    } else if (keycode == 's') {
+        // Calculate the opposite movement to go backward
+        float move_x = cos(player->rotation_angle) * move_step;
+        float move_y = sin(player->rotation_angle) * move_step;
+
+        if (can_move(player->map_info->map, player->pixel_x - move_x, player->pixel_y - move_y, move_step, player)) {
+            player->pixel_x -= move_x;
+            player->pixel_y -= move_y;
+        }
+    } else if (keycode == 'a') {
+        // Strafe left (move perpendicular to the current angle)
+        float move_x = cos(player->rotation_angle - M_PI/2) * move_step;
+        float move_y = sin(player->rotation_angle - M_PI/2) * move_step;
+
+        if (can_move(player->map_info->map, player->pixel_x + move_x, player->pixel_y + move_y, move_step, player)) {
+            player->pixel_x += move_x;
+            player->pixel_y += move_y;
+        }
+    } else if (keycode == 'd') {
+        // Strafe right (move perpendicular to the current angle)
+        float move_x = cos(player->rotation_angle + M_PI/2) * move_step;
+        float move_y = sin(player->rotation_angle + M_PI/2) * move_step;
+
+        if (can_move(player->map_info->map, player->pixel_x + move_x, player->pixel_y + move_y, move_step, player)) {
+            player->pixel_x += move_x;
+            player->pixel_y += move_y;
+        }
+    } else {
+        // Handle rotation for other keys
+        if (keycode == KEY_LEFT) {
+            player->rotation_angle -= rotation_step;
+        } else if (keycode == KEY_RIGHT) {
+            player->rotation_angle += rotation_step;
         }
     }
-    else if (keycode == 's')
-    {
-        if (can_move(player->map_info->map, player->pixel_x, player->pixel_y + move_step - 1, move_step, player))
-        {
-            player->pixel_y += move_step;
-        }
-    }
-    else if(keycode == 'a')
-    {
-        if (can_move(player->map_info->map, player->pixel_x - move_step - 1, player->pixel_y, move_step, player))
-        {
-            player->pixel_x -= move_step;
-        }
-    }
-    else if (keycode == 'd')
-    {
-        if (can_move(player->map_info->map, player->pixel_x + move_step - 1, player->pixel_y, move_step, player))
-        {
-            player->pixel_x += move_step;
-        }
-    }
-    rotate_player(player, keycode);
+
     update_player(player->g_mlx, player);
+
     return 0;
 }
 
