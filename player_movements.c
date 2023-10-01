@@ -6,7 +6,7 @@
 /*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 11:18:41 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/09/28 22:20:17 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/10/01 20:03:54 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void update_player(t_mlx *g_mlx, t_player *player)
 {
-    mlx_clear_window(g_mlx->mlx_ptr, g_mlx->win_ptr);
+   // mlx_clear_window(g_mlx->mlx_ptr, g_mlx->win_ptr);
     //draw_mlx_map(player->map_info->map, g_mlx, player->map_info);
     //printf("player x before: %d\n", player->x);
     //printf("player y before: %d\n", player->y);
@@ -57,7 +57,7 @@ void rotate_player(t_player *player, int keycode)
 
 int key_press_hook(int keycode, t_player *player)
 {
-    float move_step = 1; // Adjust this for smoother/faster movement
+    float move_step = player->walk_speed; // Adjust this for smoother/faster movement
     float rotation_step = 0.1; // Adjust this for smoother/faster rotation
 
     if (keycode == 'w') {

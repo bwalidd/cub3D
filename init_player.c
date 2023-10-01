@@ -6,7 +6,7 @@
 /*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:52:08 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/09/28 17:52:45 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/09/30 21:51:11 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void init_player(t_player *player,t_map_size *infos,t_mlx *g_mlx)
     player->g_mlx = g_mlx;
     player->circle_radius = 3;
     player->rotation_angle = PI / 2;
-    player->walk_speed = 0.5;
+    player->walk_speed = 2;
     player->turn_speed = 2 * (PI / 180);
     player->turn_direction = 1;
     player->walk_direction = 1;
