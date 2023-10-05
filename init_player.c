@@ -6,7 +6,7 @@
 /*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:52:08 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/09/30 21:51:11 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/10/02 00:55:02 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void init_player(t_player *player,t_map_size *infos,t_mlx *g_mlx)
     player->turn_speed = 2 * (PI / 180);
     player->turn_direction = 1;
     player->walk_direction = 1;
+    player->num_rays = infos->len_of_line;
 }
 /*
 void draw_line(void *win_ptr, void *mlx_ptr, int x1, int y1, int x2, int y2)

@@ -6,7 +6,7 @@
 /*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 20:48:43 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/09/28 14:51:31 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/10/02 00:54:52 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_player
     float turn_speed;
     t_map_size *map_info;
     t_mlx *g_mlx;
+    int num_rays;
 } t_player;
 
 void init_window(t_mlx *g_mlx, t_map_size *map_info);
