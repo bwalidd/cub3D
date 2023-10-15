@@ -6,7 +6,7 @@
 /*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 09:22:46 by ajeftani          #+#    #+#             */
-/*   Updated: 2023/10/15 11:22:10 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/10/15 13:28:21 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void raycasting(t_vars *vars)
     // double ray_angle = vars->player->angle - (FOV_ANGLE / 2);
      int x = 0;
 
-    while (x < WIN_WIDTH)
+    while (x < vars->map->map_width)
     {  
-       double ray_angle = vars->player->angle - (FOV_ANGLE / 2) + (x * FOV_ANGLE) / WIN_WIDTH;
+       double ray_angle = vars->player->angle - (FOV_ANGLE / 2) + (x * FOV_ANGLE) / vars->map->map_width;
          double ray_x = player_x;
          double ray_y = player_y;
 
@@ -44,7 +44,7 @@ void raycasting(t_vars *vars)
              int map_x = (int)(ray_x / TILE_SIZE);
              int map_y = (int)(ray_y / TILE_SIZE);
 
-             if (map_x < 0 || map_x >= WIN_WIDTH || map_y < 0 || map_y >= WIN_HEIGHT)
+             if (map_x < 0 || map_x >= vars->map->map_width || map_y < 0 || map_y >= vars->map->map_height)
                  break;
 
            if (vars->map->map[map_y][map_x] == 49) // imagine
@@ -55,11 +55,11 @@ void raycasting(t_vars *vars)
 
                 double distance_to_wall = sqrt(delta_x * delta_x + delta_y * delta_y);
 
-                double wall_height = (TILE_SIZE * WIN_HEIGHT) / distance_to_wall;
+                double wall_height = (TILE_SIZE * vars->map->map_height) / distance_to_wall;
 
                 int column_x = x;
 
-                mlx_draw_vertical_line(vars, column_x, (WIN_HEIGHT - wall_height) / 2, wall_height, 0xFF0000);
+                mlx_draw_vertical_line(vars, column_x, (vars->map->map_height - wall_height) / 2, wall_height, 0xFF0000);
 
                 break;
             }

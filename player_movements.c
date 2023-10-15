@@ -6,13 +6,12 @@
 /*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 11:18:41 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/10/14 17:28:27 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/10/15 13:04:32 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
- //draw_line(vars, vars->player->x / 5, vars->player->y / 5, dest_x, dest_y, 0x0000FF);
 void draw_line(t_vars *vars, int playerx, int playery, int destx, int desty, int color)
 {
     int dx = abs(destx - playerx);

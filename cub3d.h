@@ -6,7 +6,7 @@
 /*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 20:48:43 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/10/14 09:35:17 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/10/15 13:30:46 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@
 typedef struct s_map_size
 {
     char **map;
+    int map_height;
+    int map_width;
     int num_of_lines;
     int number_horizontal;    
 } t_map_size;

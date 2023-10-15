@@ -6,7 +6,7 @@
 /*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 20:47:58 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/10/14 06:22:56 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/10/15 13:23:32 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,10 @@ void fill_map_info(t_map_size *map_info,char **av)
     map_info->num_of_lines = i;
     map_info->number_horizontal = (int)ft_strlen(map_info->map[0]);
     map_info->number_horizontal--;
+    map_info->map_height = i * TILE_SIZE ;
+    map_info->map_width = map_info->number_horizontal * TILE_SIZE;
+    
+    
 }
 
 int custom_exit(void *param)
