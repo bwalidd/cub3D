@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 20:48:43 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/10/02 00:54:52 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/10/14 09:35:17 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,19 @@
 # define KEY_RIGHT 65363
 # define KEY_UP 65362
 # define KEY_ESC 53
-# define PI 3.14
-# define TILE_SIZE 40
+#define WIN_WIDTH 1000
+#define WIN_HEIGHT 700
+#define TILE_SIZE 50
+#define FOV_ANGLE 60
+#define PLAYER_SPEED 10.0
 
-# define FOV_ANGLE (60 * (PI / 180)) // this is the field of view angle by radian
 # define NUM_RAYS WINDOW_WIDTH
-
 
 typedef struct s_map_size
 {
     char **map;
     int num_of_lines;
-    int len_of_line;    
+    int number_horizontal;    
 } t_map_size;
 
 typedef struct s_mlx
@@ -54,33 +55,29 @@ typedef struct s_mlx
     int endian;
 } t_mlx;
 
-typedef struct s_player
-{
-    float x;
-    float y;
-    int dir;
-    int circle_radius;
-    int turn_direction;
-    int walk_direction;
-    float rotation_angle;
-    float walk_speed;
-    float     target_x;
-    float     pixel_x;
-    float      pixel_y;
-    float     target_y;
-    float turn_speed;
-    t_map_size *map_info;
-    t_mlx *g_mlx;
-    int num_rays;
+typedef struct s_player {
+    int   x ;
+    int   y ;
+    int      dir;
+    float    pixel_x;
+    float    pixel_y;
+    double   angle;
 } t_player;
 
+typedef struct s_vars {
+    t_map_size *map;
+    t_mlx *mlx;
+    t_player *player;
+} t_vars;
+
+void raycasting(t_vars *vars);
 void init_window(t_mlx *g_mlx, t_map_size *map_info);
-void draw_mlx_map(char **map, t_mlx *g_mlx, t_map_size *map_info);
+void draw_mlx_map( t_vars *vars ,t_mlx *g_mlx, t_map_size *map_info);
 void init_player(t_player *player, t_map_size *infos, t_mlx *g_mlx);
 void init_player_pos(char **map, t_player *player, t_mlx *g_mlx, t_map_size *infos);
 void draw_player(t_mlx *g_mlx, t_player *player);
 void update_player(t_mlx *g_mlx, t_player *player);
-int key_press_hook(int keycode, t_player *player);
-void draw_line(t_mlx *g_mlx, t_player *player);
+int key_press_hook(int keycode, t_vars *vars);
+void draw_rect(t_mlx *g_mlx, int x, int y, int width, int height, int color);
 
 #endif

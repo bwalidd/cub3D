@@ -1,0 +1,10 @@
+rm -rf main.o init_map.o init_player.o player_movements.o raycasting.o get_next_line/get_next_line.o get_next_line/get_next_line_utils.o
+rm -rf cub3D
+cc -Wall -Wextra -Werror -fsanitize=address -g3   -c -o main.o main.c
+cc -Wall -Wextra -Werror -fsanitize=address -g3   -c -o init_map.o init_map.c
+cc -Wall -Wextra -Werror -fsanitize=address -g3   -c -o init_player.o init_player.c
+cc -Wall -Wextra -Werror -fsanitize=address -g3   -c -o player_movements.o player_movements.c
+cc -Wall -Wextra -Werror -fsanitize=address -g3   -c -o raycasting.o raycasting.c
+cc -Wall -Wextra -Werror -fsanitize=address -g3   -c -o get_next_line/get_next_line.o get_next_line/get_next_line.c
+cc -Wall -Wextra -Werror -fsanitize=address -g3   -c -o get_next_line/get_next_line_utils.o get_next_line/get_next_line_utils.c
+cc -Wall -Wextra -Werror -fsanitize=address -g3 main.o init_map.o init_player.o player_movements.o raycasting.o get_next_line/get_next_line.o get_next_line/get_next_line_utils.o -lmlx -framework OpenGL -framework AppKit -o cub3D

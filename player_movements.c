@@ -3,112 +3,106 @@
 /*                                                        :::      ::::::::   */
 /*   player_movements.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 11:18:41 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/10/05 15:32:38 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/10/14 17:28:27 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void update_player(t_mlx *g_mlx, t_player *player)
+ //draw_line(vars, vars->player->x / 5, vars->player->y / 5, dest_x, dest_y, 0x0000FF);
+void draw_line(t_vars *vars, int playerx, int playery, int destx, int desty, int color)
 {
-   // mlx_clear_window(g_mlx->mlx_ptr, g_mlx->win_ptr);
-    //draw_mlx_map(player->map_info->map, g_mlx, player->map_info);
-    //printf("player x before: %d\n", player->x);
-    //printf("player y before: %d\n", player->y);
+    int dx = abs(destx - playerx);
+    int dy = abs(desty - playery);
+    int sx = (playerx < destx) ? 1 : -1;
+    int sy = (playery < desty) ? 1 : -1;
+    int err = dx - dy;
 
-    // Draw the player at the new position
-    draw_mlx_map(player->map_info->map, g_mlx, player->map_info);
-    draw_player(g_mlx, player);
-    draw_line(g_mlx,player);
-}
-
-int can_move(char **map, float x, float y, float move_step,t_player *player)
-{
-    // Calculate the new position after moving
-    int new_map_x = (int)((x + move_step) / TILE_SIZE);
-    int new_map_y = (int)((y + move_step) / TILE_SIZE);
-
-    // Check if the new position is within the map boundaries
-    if (new_map_x < 0 || new_map_y < 0 || new_map_y >= player->map_info->num_of_lines * TILE_SIZE || new_map_x >= player->map_info->len_of_line * TILE_SIZE) {
-        return 0; // Player is out of bounds
-    }
-
-    // Check if the new position contains '0' (empty space) in the map
-    return map[new_map_y][new_map_x] == '0';
-}
-void rotate_player(t_player *player, int keycode)
-{
-    if (keycode == KEY_LEFT)
+    while (1)
     {
-        printf("left\n");
-        player->rotation_angle -= player->turn_speed * player->turn_direction;
-        printf("rotation angle: %f\n", player->rotation_angle);
-    }
-    else if (keycode == KEY_RIGHT)
-    {
-        printf("right\n");
-        player->rotation_angle += player->turn_speed * player->turn_direction;
-        printf("rotation angle: %f\n", player->rotation_angle);
+        mlx_pixel_put(vars->mlx->mlx_ptr, vars->mlx->win_ptr, playerx, playery, color);
+
+        if (playerx == destx && playery == desty)
+            break;
+
+        int e2 = 2 * err;
+        if (e2 > -dy)
+        {
+            err -= dy;
+            playerx += sx;
+        }
+
+        if (e2 < dx)
+        {
+            err += dx;
+            playery += sy;
+        }
     }
 }
 
-int key_press_hook(int keycode, t_player *player)
+
+int key_press_hook(int keycode, t_vars *vars)
 {
-    float move_step = player->walk_speed; // Adjust this for smoother/faster movement
-    float rotation_step = 0.1; // Adjust this for smoother/faster rotation
-
-    if (keycode == 'w') {
-        // Calculate the movement in both x and y directions based on the rotation angle
-        float move_x = cos(player->rotation_angle) * move_step;
-        float move_y = sin(player->rotation_angle) * move_step;
-
-        if (can_move(player->map_info->map, player->pixel_x + move_x, player->pixel_y + move_y, move_step, player)) {
-            player->pixel_x += move_x;
-            player->pixel_y += move_y;
-        }
-    } else if (keycode == 's') {
-        // Calculate the opposite movement to go backward
-        float move_x = cos(player->rotation_angle) * move_step;
-        float move_y = sin(player->rotation_angle) * move_step;
-
-        if (can_move(player->map_info->map, player->pixel_x - move_x, player->pixel_y - move_y, move_step, player)) {
-            player->pixel_x -= move_x;
-            player->pixel_y -= move_y;
-        }
-    } else if (keycode == 'a') {
-        // Strafe left (move perpendicular to the current angle)
-        float move_x = cos(player->rotation_angle - M_PI/2) * move_step;
-        float move_y = sin(player->rotation_angle - M_PI/2) * move_step;
-
-        if (can_move(player->map_info->map, player->pixel_x + move_x, player->pixel_y + move_y, move_step, player)) {
-            player->pixel_x += move_x;
-            player->pixel_y += move_y;
-        }
-    } else if (keycode == 'd') {
-        // Strafe right (move perpendicular to the current angle)
-        float move_x = cos(player->rotation_angle + M_PI/2) * move_step;
-        float move_y = sin(player->rotation_angle + M_PI/2) * move_step;
-
-        if (can_move(player->map_info->map, player->pixel_x + move_x, player->pixel_y + move_y, move_step, player)) {
-            player->pixel_x += move_x;
-            player->pixel_y += move_y;
-        }
-    } else {
-        // Handle rotation for other keys
-        if (keycode == KEY_LEFT) {
-            player->rotation_angle -= rotation_step;
-        } else if (keycode == KEY_RIGHT) {
-            player->rotation_angle += rotation_step;
-        }
+    if (keycode == 53) 
+    {
+        mlx_destroy_window(vars->mlx->mlx_ptr, vars->mlx->win_ptr);
+        exit(0);
     }
+    else if (keycode == 0) 
+    {
+        vars->player->angle -= 10.0;
+    }
+    else if (keycode == 2) 
+    {
+        vars->player->angle += 10.0;
+    }
+    else if (keycode == 13) 
+    {
+        double new_x = vars->player->pixel_x + PLAYER_SPEED * cos(vars->player->angle * M_PI / 180);
+        double new_y = vars->player->pixel_y + PLAYER_SPEED * sin(vars->player->angle * M_PI / 180);
+            int map_x = (int)(new_x / TILE_SIZE );
+            int map_y = (int)(new_y / TILE_SIZE );
+            if (vars->map->map[map_y][map_x] == 48) //maybe need more protection
+           {
+                vars->player->pixel_x =  new_x;
+                vars->player->pixel_y =  new_y;
+               vars->player->x = new_x;
+               vars->player->y = new_y;
+           }
+    }
+    else if (keycode == 1) 
+    {
+        double new_x = vars->player->pixel_x - PLAYER_SPEED * cos(vars->player->angle * M_PI / 180);
+        double new_y = vars->player->pixel_y - PLAYER_SPEED * sin(vars->player->angle * M_PI / 180);
+            int map_x = (int)(new_x / TILE_SIZE );
+            int map_y = (int)(new_y / TILE_SIZE );
+            if (vars->map->map[map_y][map_x] == 48) //maybe need more protection
+           {
+                vars->player->pixel_x =  new_x;
+                vars->player->pixel_y =  new_y;
+               vars->player->x = new_x;
+               vars->player->y = new_y;
+           }
+    }
+    mlx_clear_window(vars->mlx->mlx_ptr, vars->mlx->win_ptr);
+    draw_mlx_map(vars,vars->mlx,vars->map);
 
-    update_player(player->g_mlx, player);
+    double angle_rad = vars->player->angle * M_PI / 180; 
+    int distance_from_player = 50; 
 
-    return 0;
+
+    int dest_x = vars->player->x / 5 + distance_from_player * cos(angle_rad);
+    int dest_y = vars->player->y / 5 + distance_from_player * sin(angle_rad);
+
+
+    draw_line(vars, vars->player->x / 5, vars->player->y / 5, dest_x, dest_y, 0x000FF);
+    raycasting(vars);
+ 
+
+    return (0);
 }
-
 
 
