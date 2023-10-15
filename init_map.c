@@ -6,7 +6,7 @@
 /*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 21:08:37 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/10/14 06:57:23 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/10/15 14:18:28 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 void    init_window(t_mlx *g_mlx,t_map_size *map_info)
 {
+    (void)map_info;
     g_mlx->mlx_ptr = mlx_init();
-    g_mlx->win_ptr = mlx_new_window(g_mlx->mlx_ptr, map_info->number_horizontal * TILE_SIZE, map_info->num_of_lines * TILE_SIZE, "Cub3D");
+    g_mlx->win_ptr = mlx_new_window(g_mlx->mlx_ptr, WIN_WIDTH, WIN_HEIGHT , "Cub3D");
 }
 
 void draw_rect(t_mlx *g_mlx, int x, int y, int width, int height, int color) 
