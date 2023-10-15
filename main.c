@@ -6,7 +6,7 @@
 /*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 20:47:58 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/10/15 14:31:47 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/10/15 14:45:44 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int main(int ac, char **av)
     vars->mlx = g_mlx;
     init_window(g_mlx,map_info);
     init_player_pos(map_info->map, player,g_mlx,map_info);
-    //draw_mlx_map(vars,g_mlx,map_info);
+    draw_mlx_map(vars,g_mlx,map_info);
     mlx_hook(g_mlx->win_ptr, 2, 1L << 0, key_press_hook, vars);
     //draw_mlx_map(vars,g_mlx,map_info);
     //mlx_hook(g_mlx->win_ptr, 17, 1L << 17, custom_exit, vars);
