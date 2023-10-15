@@ -6,7 +6,7 @@
 /*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 09:22:46 by ajeftani          #+#    #+#             */
-/*   Updated: 2023/10/15 14:08:00 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/10/15 14:32:19 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,5 @@ void raycasting(t_vars *vars)
        }
             x++;
     }
+    draw_mlx_map(vars,vars->mlx,vars->map);
 }

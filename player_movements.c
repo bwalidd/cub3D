@@ -6,7 +6,7 @@
 /*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 11:18:41 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/10/15 13:04:32 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/10/15 14:30:42 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int key_press_hook(int keycode, t_vars *vars)
            }
     }
     mlx_clear_window(vars->mlx->mlx_ptr, vars->mlx->win_ptr);
-    draw_mlx_map(vars,vars->mlx,vars->map);
+    //draw_mlx_map(vars,vars->mlx,vars->map);
 
     double angle_rad = vars->player->angle * M_PI / 180; 
     int distance_from_player = 50; 
@@ -100,7 +100,6 @@ int key_press_hook(int keycode, t_vars *vars)
     draw_line(vars, vars->player->x / 5, vars->player->y / 5, dest_x, dest_y, 0x000FF);
     raycasting(vars);
  
-
     return (0);
 }
 
