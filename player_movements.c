@@ -6,7 +6,7 @@
 /*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 11:18:41 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/10/15 14:30:42 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/10/16 10:41:27 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ int key_press_hook(int keycode, t_vars *vars)
         mlx_destroy_window(vars->mlx->mlx_ptr, vars->mlx->win_ptr);
         exit(0);
     }
-    else if (keycode == 0) 
+    else if (keycode == 123) 
     {
         vars->player->angle -= 10.0;
     }
-    else if (keycode == 2) 
+    else if (keycode == 124) 
     {
         vars->player->angle += 10.0;
     }
@@ -86,6 +86,35 @@ int key_press_hook(int keycode, t_vars *vars)
                vars->player->y = new_y;
            }
     }
+
+    else if (keycode == 2)
+{
+    double new_x = vars->player->pixel_x - PLAYER_SPEED * cos((vars->player->angle - 90.0) * M_PI / 180);
+    double new_y = vars->player->pixel_y - PLAYER_SPEED * sin((vars->player->angle - 90.0) * M_PI / 180);
+    int map_x = (int)(new_x / TILE_SIZE);
+    int map_y = (int)(new_y / TILE_SIZE);
+    if (vars->map->map[map_y][map_x] == 48)
+    {
+        vars->player->pixel_x = new_x;
+        vars->player->pixel_y = new_y;
+        vars->player->x = new_x;
+        vars->player->y = new_y;
+    }
+}
+else if (keycode == 0)
+{
+    double new_x = vars->player->pixel_x + PLAYER_SPEED * cos((vars->player->angle - 90.0) * M_PI / 180);
+    double new_y = vars->player->pixel_y + PLAYER_SPEED * sin((vars->player->angle - 90.0) * M_PI / 180);
+    int map_x = (int)(new_x / TILE_SIZE);
+    int map_y = (int)(new_y / TILE_SIZE);
+    if (vars->map->map[map_y][map_x] == 48) 
+    {
+        vars->player->pixel_x = new_x;
+        vars->player->pixel_y = new_y;
+        vars->player->x = new_x;
+        vars->player->y = new_y;
+    }
+}
     mlx_clear_window(vars->mlx->mlx_ptr, vars->mlx->win_ptr);
     //draw_mlx_map(vars,vars->mlx,vars->map);
 

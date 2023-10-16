@@ -6,7 +6,7 @@
 /*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:52:08 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/10/13 15:06:14 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/10/16 06:26:52 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void    init_player_pos(char **map,t_player *player,t_mlx *g_mlx,t_map_size *inf
 //         j = y1;
 //         while (j < y2)
 //         {
-//             mlx_pixel_put(mlx_ptr, win_ptr, i, j, 0x00FF0000);
+//             my_mlx_pixel_put(mlx_ptr, win_ptr, i, j, 0x00FF0000);
 //             j++;
 //         }
 //         i++;
@@ -103,7 +103,7 @@ void    init_player_pos(char **map,t_player *player,t_mlx *g_mlx,t_map_size *inf
 //     int i = 0;
 //     while (i < steps)
 //     {
-//         mlx_pixel_put(g_mlx->mlx_ptr, g_mlx->win_ptr, round(x), round(y), 0x00FF0000);
+//         my_mlx_pixel_put(g_mlx->mlx_ptr, g_mlx->win_ptr, round(x), round(y), 0x00FF0000);
 //         x += x_increment;
 //         y += y_increment;
 //         i++;
@@ -125,7 +125,7 @@ void    init_player_pos(char **map,t_player *player,t_mlx *g_mlx,t_map_size *inf
 //         j = map_y * TILE_SIZE;
 //         while (j < (map_y * TILE_SIZE + TILE_SIZE / 40))
 //         {
-//             mlx_pixel_put(g_mlx->mlx_ptr, g_mlx->win_ptr, i, j, 0x00FFFF00);
+//             my_mlx_pixel_put(g_mlx->mlx_ptr, g_mlx->win_ptr, i, j, 0x00FFFF00);
 //             j++;
 //         }
 //         i++;

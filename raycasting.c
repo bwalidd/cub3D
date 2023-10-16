@@ -6,7 +6,7 @@
 /*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 09:22:46 by ajeftani          #+#    #+#             */
-/*   Updated: 2023/10/15 14:32:19 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/10/16 10:06:32 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,20 @@ void raycasting(t_vars *vars)
      double player_x = vars->player->x;
      double player_y = vars->player->y;
     
-    // double ray_angle = vars->player->angle - (FOV_ANGLE / 2);
+     double ray_angle = vars->player->angle - (FOV_ANGLE / 2);
      int x = 0;
 
     while (x < WIN_WIDTH)
     {  
-       double ray_angle = vars->player->angle - (FOV_ANGLE / 2) + (x * FOV_ANGLE) / WIN_WIDTH;
          double ray_x = player_x;
          double ray_y = player_y;
-
+         
+         //double ray_angle = vars->player->angle - (FOV_ANGLE / 2) + (x * FOV_ANGLE) / WIN_WIDTH;
+         
          while (1)
          {
-            ray_x = ray_x + cos(ray_angle * M_PI / 180) * 1.0;
-            ray_y = ray_y + sin(ray_angle * M_PI / 180) * 1.0;
+            ray_x = ray_x + cos(ray_angle * M_PI / 180) * 0.5;
+            ray_y = ray_y + sin(ray_angle * M_PI / 180) * 0.5;
 
              int map_x = (int)(ray_x / TILE_SIZE);
              int map_y = (int)(ray_y / TILE_SIZE);
@@ -54,8 +55,8 @@ void raycasting(t_vars *vars)
                 double delta_y = ray_y - player_y;
 
                 double distance_to_wall = sqrt(delta_x * delta_x + delta_y * delta_y);
-
-                double wall_height = (TILE_SIZE * WIN_HEIGHT) / distance_to_wall;
+                double corrected_distance = distance_to_wall * cos((ray_angle - vars->player->angle) * (M_PI / 180));
+                double wall_height = (TILE_SIZE * WIN_HEIGHT) / corrected_distance;
 
                 int column_x = x;
 
@@ -64,6 +65,7 @@ void raycasting(t_vars *vars)
                 break;
             }
        }
+          ray_angle = ray_angle + 0.06;
             x++;
     }
     draw_mlx_map(vars,vars->mlx,vars->map);
