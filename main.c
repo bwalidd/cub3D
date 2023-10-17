@@ -6,7 +6,7 @@
 /*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 20:47:58 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/10/16 06:49:36 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/10/16 13:55:48 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ int main(int ac, char **av)
         return (0);
     //if (parse_map(av[1]) == 0)
       //  return (1);
+    //t_data *data;
+    //data = malloc(sizeof(t_data));
     player = malloc(sizeof(t_player));
     map_info = malloc(sizeof(t_map_size));
     vars = malloc(sizeof(t_vars));

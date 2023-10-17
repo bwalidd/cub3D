@@ -6,7 +6,7 @@
 /*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 20:48:43 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/10/16 10:12:23 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/10/16 13:19:57 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,14 @@ typedef struct s_vars {
     t_mlx *mlx;
     t_player *player;
 } t_vars;
+
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
 
 void raycasting(t_vars *vars);
 void init_window(t_mlx *g_mlx, t_map_size *map_info);

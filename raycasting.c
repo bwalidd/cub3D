@@ -6,11 +6,21 @@
 /*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 09:22:46 by ajeftani          #+#    #+#             */
-/*   Updated: 2023/10/16 10:06:32 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/10/16 15:02:58 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+
+// void	my_mlx_pixel_put(t_data *data, int y, int x, int color)
+// {
+// 	unsigned char	*dst;
+
+// 	dst = (unsigned char *)data->main->addr + (y * data->main->line_length + x
+// * (data->main->bits_per_pixel / 8));
+// 	*((unsigned int *)dst) = color;
+// }
 
 void mlx_draw_vertical_line(t_vars *vars, int x, int y, int height, int color)
 {
@@ -29,7 +39,7 @@ void raycasting(t_vars *vars)
     
      double ray_angle = vars->player->angle - (FOV_ANGLE / 2);
      int x = 0;
-
+     
     while (x < WIN_WIDTH)
     {  
          double ray_x = player_x;
@@ -59,8 +69,8 @@ void raycasting(t_vars *vars)
                 double wall_height = (TILE_SIZE * WIN_HEIGHT) / corrected_distance;
 
                 int column_x = x;
-
-                mlx_draw_vertical_line(vars, column_x, (WIN_HEIGHT - wall_height) / 2, wall_height, 0xFF0000);
+                
+                mlx_draw_vertical_line(vars, column_x, (WIN_HEIGHT - wall_height) / 2, wall_height, 0xFF9900);
 
                 break;
             }
