@@ -6,7 +6,7 @@
 /*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 09:22:46 by ajeftani          #+#    #+#             */
-/*   Updated: 2023/10/17 12:12:22 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/10/17 13:03:03 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-    if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT) {
+    if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT) 
+    {
         char *dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
         *(unsigned int *)dst = color;
     }
