@@ -6,7 +6,7 @@
 /*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 09:22:46 by ajeftani          #+#    #+#             */
-/*   Updated: 2023/10/17 10:39:43 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/10/17 12:12:22 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
-    char *dst;
-
-    dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-    *(unsigned int *)dst = color;
+    if (x >= 0 && x < WIN_WIDTH && y >= 0 && y < WIN_HEIGHT) {
+        char *dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+        *(unsigned int *)dst = color;
+    }
 }
 
 void draw_ceiling(t_vars *vars, int color)
@@ -56,9 +56,9 @@ void mlx_draw_vertical_line(t_vars *vars, int x, int y, int height, int color)
     int i = 0;
     while (i < height) 
     {
-        mlx_pixel_put(vars->mlx->mlx_ptr, vars->mlx->win_ptr, x, y + i, color);
-        //my_mlx_pixel_put(vars->data,x,y,color);
-        i++;
+        //mlx_pixel_put(vars->mlx->mlx_ptr, vars->mlx->win_ptr, x, y + i, color);
+            my_mlx_pixel_put(vars->data,x,y + i,color);
+            i++;
     }
 }
 
@@ -113,5 +113,6 @@ void raycasting(t_vars *vars)
           ray_angle = ray_angle + 0.06;
             x++;
     }
+    mlx_put_image_to_window(vars->mlx->mlx_ptr,vars->mlx->win_ptr, vars->data->img, 0,0);
     draw_mlx_map(vars,vars->mlx,vars->map);
 }
