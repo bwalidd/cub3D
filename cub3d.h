@@ -6,7 +6,7 @@
 /*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 20:48:43 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/10/17 09:04:02 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:35:14 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void init_player_pos(char **map, t_player *player, t_mlx *g_mlx, t_map_size *inf
 void draw_player(t_mlx *g_mlx, t_player *player);
 void update_player(t_mlx *g_mlx, t_player *player);
 int key_press_hook(int keycode, t_vars *vars);
+void my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void draw_rect(t_mlx *g_mlx, int x, int y, int width, int height, int color);
 
 #endif

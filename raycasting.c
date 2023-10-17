@@ -6,7 +6,7 @@
 /*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 09:22:46 by ajeftani          #+#    #+#             */
-/*   Updated: 2023/10/17 09:20:22 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:39:43 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,21 @@ void draw_ceiling(t_vars *vars, int color)
     while (x < WIN_WIDTH) {
         y = 0;
         while (y < WIN_HEIGHT / 2) {
+            my_mlx_pixel_put(vars->data, x, y, color);
+            y++;
+        }
+        x++;
+    }
+}
+void draw_floor(t_vars *vars, int color)
+{
+    int x, y;
+
+    x = 0;
+    while (x < WIN_WIDTH) {
+        y = WIN_HEIGHT / 2;
+        while (y < WIN_HEIGHT)
+        {
             my_mlx_pixel_put(vars->data, x, y, color);
             y++;
         }
@@ -56,7 +71,9 @@ void raycasting(t_vars *vars)
      int x = 0;
 
     draw_ceiling(vars, 0x87CEEB);
-    mlx_put_image_to_window(vars->mlx->mlx_ptr,vars->mlx->win_ptr, vars->data->img, 0, 0);
+    draw_floor(vars,0xFFA54F);
+    
+    mlx_put_image_to_window(vars->mlx->mlx_ptr,vars->mlx->win_ptr, vars->data->img, 0,0);
      
     while (x < WIN_WIDTH)
     {  
@@ -88,7 +105,7 @@ void raycasting(t_vars *vars)
 
                 int column_x = x;
                 
-                mlx_draw_vertical_line(vars, column_x, (WIN_HEIGHT - wall_height) / 2, wall_height, 0xFF9900);
+                mlx_draw_vertical_line(vars, column_x, (WIN_HEIGHT - wall_height) / 2, wall_height, 0x660000);
 
                 break;
             }

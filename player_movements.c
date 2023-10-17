@@ -6,7 +6,7 @@
 /*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 11:18:41 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/10/16 10:41:27 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/10/17 10:37:01 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ else if (keycode == 0)
     int dest_y = vars->player->y / 5 + distance_from_player * sin(angle_rad);
 
 
-    draw_line(vars, vars->player->x / 5, vars->player->y / 5, dest_x, dest_y, 0x000FF);
+    draw_line(vars, vars->player->x / 5, vars->player->y / 5, dest_x, dest_y, 0xFF1100);
     raycasting(vars);
  
     return (0);
