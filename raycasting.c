@@ -6,7 +6,7 @@
 /*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 09:22:46 by ajeftani          #+#    #+#             */
-/*   Updated: 2023/10/17 09:16:59 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/10/17 09:20:22 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,17 @@ void draw_ceiling(t_vars *vars, int color)
 {
     int x, y;
 
-    for (x = 0; x < WIN_WIDTH; x++) {
-        for (y = 0; y < WIN_HEIGHT / 2; y++) {
+    x = 0;
+    while (x < WIN_WIDTH) {
+        y = 0;
+        while (y < WIN_HEIGHT / 2) {
             my_mlx_pixel_put(vars->data, x, y, color);
+            y++;
         }
+        x++;
     }
 }
+
 
 void mlx_draw_vertical_line(t_vars *vars, int x, int y, int height, int color)
 {
