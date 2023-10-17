@@ -6,7 +6,7 @@
 /*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 20:48:43 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/10/16 13:19:57 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/10/17 09:04:02 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,14 @@
 
 # define NUM_RAYS WINDOW_WIDTH
 
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
+
 typedef struct s_map_size
 {
     char **map;
@@ -67,22 +75,14 @@ typedef struct s_player {
 } t_player;
 
 typedef struct s_vars {
-    
+    t_data *data;
     t_map_size *map;
     t_mlx *mlx;
     t_player *player;
 } t_vars;
 
-typedef struct	s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
-
 void raycasting(t_vars *vars);
-void init_window(t_mlx *g_mlx, t_map_size *map_info);
+void init_window(t_mlx *g_mlx,t_map_size *map_info, t_data *data);
 void draw_mlx_map( t_vars *vars ,t_mlx *g_mlx, t_map_size *map_info);
 void init_player(t_player *player, t_map_size *infos, t_mlx *g_mlx);
 void init_player_pos(char **map, t_player *player, t_mlx *g_mlx, t_map_size *infos);

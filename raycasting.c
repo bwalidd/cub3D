@@ -6,21 +6,30 @@
 /*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 09:22:46 by ajeftani          #+#    #+#             */
-/*   Updated: 2023/10/16 15:02:58 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/10/17 09:16:59 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+    char *dst;
 
-// void	my_mlx_pixel_put(t_data *data, int y, int x, int color)
-// {
-// 	unsigned char	*dst;
+    dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+    *(unsigned int *)dst = color;
+}
 
-// 	dst = (unsigned char *)data->main->addr + (y * data->main->line_length + x
-// * (data->main->bits_per_pixel / 8));
-// 	*((unsigned int *)dst) = color;
-// }
+void draw_ceiling(t_vars *vars, int color)
+{
+    int x, y;
+
+    for (x = 0; x < WIN_WIDTH; x++) {
+        for (y = 0; y < WIN_HEIGHT / 2; y++) {
+            my_mlx_pixel_put(vars->data, x, y, color);
+        }
+    }
+}
 
 void mlx_draw_vertical_line(t_vars *vars, int x, int y, int height, int color)
 {
@@ -28,6 +37,7 @@ void mlx_draw_vertical_line(t_vars *vars, int x, int y, int height, int color)
     while (i < height) 
     {
         mlx_pixel_put(vars->mlx->mlx_ptr, vars->mlx->win_ptr, x, y + i, color);
+        //my_mlx_pixel_put(vars->data,x,y,color);
         i++;
     }
 }
@@ -39,6 +49,9 @@ void raycasting(t_vars *vars)
     
      double ray_angle = vars->player->angle - (FOV_ANGLE / 2);
      int x = 0;
+
+    draw_ceiling(vars, 0x87CEEB);
+    mlx_put_image_to_window(vars->mlx->mlx_ptr,vars->mlx->win_ptr, vars->data->img, 0, 0);
      
     while (x < WIN_WIDTH)
     {  
