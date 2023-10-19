@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 20:47:58 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/10/17 12:07:29 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/10/19 01:45:06 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ int main(int ac, char **av)
     
     if (ac < 2)
         return (0);
-    //if (parse_map(av[1]) == 0)
-      //  return (1);
+    if (parse_map(av[1]))
+       return (1);
     //t_data *data;
     //data = malloc(sizeof(t_data));
     player = malloc(sizeof(t_player));
