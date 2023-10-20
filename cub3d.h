@@ -51,7 +51,10 @@ typedef struct s_map_size
 {
     char **map;
     int map_height;
+    char **map_content;
     int map_width;
+    int color_c;
+    int color_f;
     int num_of_lines;
     int number_horizontal;    
 } t_map_size;
@@ -92,4 +95,5 @@ int key_press_hook(int keycode, t_vars *vars);
 void my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void draw_rect(t_mlx *g_mlx, int x, int y, int width, int height, int color);
 int parse_map(char *str);
+int parsing(char *str,t_map_size *map_info)
 #endif

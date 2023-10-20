@@ -81,7 +81,7 @@ int main(int ac, char **av)
     
     if (ac < 2)
         return (0);
-    if (parse_map(av[1]))
+    if (parsing(av[1], map_info))
        return (1);
     //t_data *data;
     //data = malloc(sizeof(t_data));
