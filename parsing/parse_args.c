@@ -12,7 +12,7 @@
 
 #include "../cub3d.h"
 
-static int ft_strcmp(char *s1, char *s2)
+static int ft_strcmpp(char *s1, char *s2)
 {
     int i = 0;
     while(s1[i] && s2[i])
@@ -38,16 +38,15 @@ int is_valid(char *str)
     return 1;
 }
 
-int parse_map(char *str)
+int get_file_extension(char *str)
 {
     int i = 0;
     int index_to_start;
 
-    printf("%s ===== \n",str);
     while(str[i])
         i++;
     index_to_start = i - 4;
-    if (ft_strcmp(str + index_to_start, ".cub"))
+    if (ft_strcmpp(str + index_to_start, ".cub"))
     {
         if (is_valid(str))
             return 0;

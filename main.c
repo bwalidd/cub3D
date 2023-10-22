@@ -81,12 +81,12 @@ int main(int ac, char **av)
     
     if (ac < 2)
         return (0);
+    map_info = malloc(sizeof(t_map_size));
     if (parsing(av[1], map_info))
        return (1);
     //t_data *data;
     //data = malloc(sizeof(t_data));
     player = malloc(sizeof(t_player));
-    map_info = malloc(sizeof(t_map_size));
     vars = malloc(sizeof(t_vars));
     data = malloc(sizeof(t_data));
     vars->data = data;

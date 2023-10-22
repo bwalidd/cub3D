@@ -12,7 +12,7 @@
 
 #include "../cub3d.h"
 
-int cacl_lines(char *str)
+int calc_lines(char *str)
 {
     int i;
     int fd;
@@ -26,7 +26,7 @@ int cacl_lines(char *str)
 }
 
 
-void get_cub_file_info(char *str,t_map_size *map_info)
+static void get_cub_file_info(char *str,t_map_size *map_info)
 {
     int fd;
     int len_of_line;
@@ -43,23 +43,41 @@ void get_cub_file_info(char *str,t_map_size *map_info)
     close(fd);
 }
 
+static int  parse_is_here_map(t_map_size *map_info)
+{
+    int i = 0;
+    while(map_info->map_content[i])
+    {
+        if (map_info->map_content[i][0] == ' ' || map_info->map_content[i][0] == '0'
+        || map_info->map_content[i][0] == '1')
+            return 0;
+        i++;
+    }
+    return 1;
+}
 
-void check_content_order(t_map_size *map_info)
+static void check_content_order(t_map_size *map_info)
 {
     int i = 0;
     parse_texture(map_info, &i);
-    while (map_info->map_content[i] && ft_strcmp(map_info->map_content[i],"\n"))
+    while (map_info->map_content[i] && ft_strcmp(map_info->map_content[i],"\n") == 0)
         i++;
     parse_color(map_info);
-    while (map_info->map_content[i] && ft_strcmp(map_info->map_content[i],"\n"))
-        i++;
+    if (parse_is_here_map(map_info))
+    {
+        write(2,"no map detected\n",17);
+        exit (1);
+    }
 }
 
 
 int parsing(char *str,t_map_size *map_info)
 {
-    if (parse_map(str))
+    if (get_file_extension(str))
         return 1;
     get_cub_file_info(str,map_info);
     check_content_order(map_info);
+    get_map_textures(map_info);
+    get_map(map_info);
+    return 0;
 }

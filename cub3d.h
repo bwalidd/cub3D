@@ -50,12 +50,17 @@ typedef struct	s_data {
 typedef struct s_map_size
 {
     char **map;
-    int map_height;
     char **map_content;
-    int map_width;
+    char *no_texture;
+    char *so_texture;
+    char *we_texture;
+    char *ea_texture;
     int color_c;
+    int map_height;
     int color_f;
+    int map_width;
     int num_of_lines;
+    int len_of_line;
     int number_horizontal;    
 } t_map_size;
 
@@ -94,6 +99,17 @@ void update_player(t_mlx *g_mlx, t_player *player);
 int key_press_hook(int keycode, t_vars *vars);
 void my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void draw_rect(t_mlx *g_mlx, int x, int y, int width, int height, int color);
-int parse_map(char *str);
-int parsing(char *str,t_map_size *map_info)
+int get_file_extension(char *str);
+int parsing(char *str,t_map_size *map_info);
+void parse_texture(t_map_size *map_info,int *i);
+void parse_color(t_map_size *map_info);
+void get_map_textures(t_map_size *map_info);
+void get_map(t_map_size *map_info);
+int	ft_atoi(const char *str);
+char	**ft_split(char const *s, char c);
+char	*ft_strdup(const char *s1);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
+int ft_strcmp(char *s1, char *s2);
+int	ft_isdigit(int c);
+void	*ft_memcpy(void *dst, const void *src, size_t n);
 #endif
