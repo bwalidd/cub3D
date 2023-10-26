@@ -36,6 +36,14 @@ void parse_texture(t_map_size *map_info,int *i)
     }
 }
 
+static void init_textures(t_map_size *map_info)
+{
+    map_info->so_texture = NULL;
+    map_info->no_texture = NULL;
+    map_info->ea_texture = NULL;
+    map_info->we_texture = NULL;
+} 
+
 
 void get_map_textures(t_map_size *map_info)
 {
@@ -43,23 +51,25 @@ void get_map_textures(t_map_size *map_info)
     int i;
 
     i = 0;
+    init_textures(map_info);
     while (i < 4)
     {
         splitted = ft_split(map_info->map_content[i], ' ');
-        if (ft_strncmp(splitted[0],"NO",3) == 0)
-            map_info->no_texture = ft_strdup(splitted[1]);
-        else if (ft_strncmp(splitted[0],"SO",3) == 0)
-            map_info->so_texture = ft_strdup(splitted[1]);
-        else if (ft_strncmp(splitted[0],"WE",3) == 0)
-            map_info->we_texture = ft_strdup(splitted[1]);
-        else if (ft_strncmp(splitted[0],"EA",3) == 0)
-            map_info->ea_texture = ft_strdup(splitted[1]);
+        //printf("splited[0] (%s) splited[1] (%s) \n",splitted[0],splitted[1]);
+        if (ft_strncmp(splitted[0],"NO",2) == 0)
+            map_info->no_texture = ft_strndup(splitted[1],ft_strlen(splitted[1]) - 2);
+        else if (ft_strncmp(splitted[0],"SO",2) == 0)
+            map_info->so_texture = ft_strndup(splitted[1],ft_strlen(splitted[1]) - 2);
+        else if (ft_strncmp(splitted[0],"WE",2) == 0)
+            map_info->we_texture = ft_strndup(splitted[1],ft_strlen(splitted[1]) - 2);
+        else if (ft_strncmp(splitted[0],"EA",2) == 0)
+            map_info->ea_texture = ft_strndup(splitted[1],ft_strlen(splitted[1]) - 2);
         free(splitted);
         i++;
     }
     if (map_info->no_texture == NULL || map_info->so_texture == NULL || map_info->we_texture == NULL || map_info->ea_texture == NULL)
     {
-        write(2,"wrong texture format\n",21);
+        write(2,"a texture null\n",16);
         exit(1);
     }
 }

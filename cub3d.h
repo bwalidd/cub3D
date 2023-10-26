@@ -111,5 +111,11 @@ char	*ft_strdup(const char *s1);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 int ft_strcmp(char *s1, char *s2);
 int	ft_isdigit(int c);
+void check_map_cadre(t_map_size *map_info);
+char *ft_strndup(char *s1, int n);
+void check_map(t_map_size *map_info);
+//void	*ft_calloc(size_t count, size_t size);
+int check_chars(char c);
+int check_wall_expanded(char **map,int j);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 #endif

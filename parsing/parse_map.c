@@ -1,49 +1,146 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_file_extension.c                                        :+:      :+:    :+:   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/19 15:40:52 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/10/19 15:40:52 by wbouwach         ###   ########.fr       */
+/*   Created: 2023/10/23 01:34:38 by wbouwach          #+#    #+#             */
+/*   Updated: 2023/10/23 01:34:38 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
+
 #include "../cub3d.h"
+
+
+int check_chars(char c)
+{
+    if (c != 'W' && c != 'S' && c != 'E' && c != 'N')
+    {
+        return 1;
+    }
+    return 0;
+}
+
+void check_double(t_map_size *map_info)
+{
+    int i;
+    int j;
+    int found;
+
+    found = 0;
+    i = 0;
+    while (map_info->map[i])
+    {
+        j = 0;
+        while (map_info->map[i][j])
+        {
+            if (check_chars(map_info->map[i][j]) == 0)
+                found++;
+            j++;
+        }
+        i++;
+    }
+    if (found != 1)
+    {
+        write(2,"check their is one player\n",27);
+        exit (1);
+    }
+}
+
+void check_map(t_map_size *map_info)
+{
+    int i;
+    int j;
+
+    i = 0;
+    while (map_info->map[i])
+    {
+        j = 0;
+        //printf("--%s--\n",map_info->map[i]);
+        while (map_info->map[i][j])
+        {
+            if (map_info->map[i][j] != ' ' && map_info->map[i][j] != '1' 
+                && map_info->map[i][j] != '0' && check_chars(map_info->map[i][j]))
+            {
+                printf("%d %d ==== \n",i,j);
+                write(2,"there is a wrong char in your map\n",35);
+                exit (1);                                                                     
+            }
+            j++;
+        }
+        i++;
+    }
+    check_double(map_info);
+    check_map_cadre(map_info);
+}
+
 
 int get_num_of_lines(char **content)
 {
     int i;
+    int j;
 
     i = 0;
-    while (content[i] && (content[i][0] != ' ' || content[i][0] != '1' || content[i][0] != '0'))
+    while (content[i] && content[i][0] != ' ' && content[i][0] != '1' && content[i][0] != '0')
         i++;
-    i = 0;
+    j = i;
     while (content[i] && (content[i][0] == ' ' || content[i][0] == '1' || content[i][0] == '0'))
         i++;
-    return (i);
+    return (i - j);
 }
+
+void allocate_spaces(t_map_size *map_info)
+{
+    int i = 0;
+    while (map_info->map_content[i]) 
+    {
+        if (map_info->map_content[i][0] == ' ' || map_info->map_content[i][0] == '0' || map_info->map_content[i][0] == '1')
+        {
+           if (map_info->len_of_line < ft_strlen(map_info->map_content[i]))
+           {
+                map_info->len_of_line = ft_strlen(map_info->map_content[i]);
+                printf(" -- %d\n",map_info->len_of_line);
+           }
+        }
+        i++;
+    }
+    i = 0;
+    while (i < map_info->num_of_lines)
+    {
+        map_info->map[i] = calloc(map_info->len_of_line, 1);
+        i++;
+    }
+}
+
 
 
 void get_map(t_map_size *map_info)
 {
     int i;
     int j;
+    int count;
 
+    count = 0;
     i = 0;
     j = 0;
     map_info->len_of_line = 0;
     map_info->num_of_lines = get_num_of_lines(map_info->map_content);
+    printf("n o l = %d\n",map_info->num_of_lines);
     map_info->map = malloc(sizeof(char *) * (map_info->num_of_lines + 1));
+    allocate_spaces(map_info);
     while (map_info->map_content[i])
     {
         if(map_info->map_content[i][0] == ' ' || map_info->map_content[i][0] == '1' || map_info->map_content[i][0] == '0')
         {
-            map_info->map[j] = ft_strdup(map_info->map_content[i]);
+            if (count != map_info->num_of_lines - 1)
+                map_info->map[j] = ft_strndup(map_info->map_content[i],ft_strlen(map_info->map_content[i]) - 2);
+            else
+                map_info->map[j] = ft_strdup(map_info->map_content[i]);
+            count++;
             j++;
-            if(map_info->len_of_line < ft_strlen(map_info->map_content[j - 1]))
-                map_info->len_of_line = ft_strlen(map_info->map_content[j - 1]);
         }
         i++;
     }

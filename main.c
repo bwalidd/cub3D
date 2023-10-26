@@ -51,18 +51,18 @@ char **split_map(char *file)
 
 
 
-void fill_map_info(t_map_size *map_info,char **av)
-{
-    int i = 0;
-    map_info->map = split_map(av[1]);
-    while (map_info->map[i])
-        i++;
-    map_info->num_of_lines = i;
-    map_info->number_horizontal = (int)ft_strlen(map_info->map[0]);
-    map_info->number_horizontal--;
-    //map_info->map_height = i * TILE_SIZE ;
-    //map_info->map_width = map_info->number_horizontal * TILE_SIZE;
-}
+// void fill_map_info(t_map_size *map_info,char **av)
+// {
+//     int i = 0;
+//     map_info->map = split_map(av[1]);
+//     while (map_info->map[i])
+//         i++;
+//     map_info->num_of_lines = i;
+//     map_info->number_horizontal = (int)ft_strlen(map_info->map[0]);
+//     map_info->number_horizontal--;
+//     //map_info->map_height = i * TILE_SIZE;
+//     //map_info->map_width = map_info->number_horizontal * TILE_SIZE;
+// }
 
 int custom_exit(void *param)
 {
@@ -93,7 +93,7 @@ int main(int ac, char **av)
     vars->player = player;
     vars->map = map_info;
     vars->player->angle = 0;
-    fill_map_info(map_info,av);
+    //fill_map_info(map_info,av);
     g_mlx = malloc(sizeof(t_mlx));
     vars->mlx = g_mlx;
     init_window(g_mlx,map_info,data);

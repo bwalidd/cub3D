@@ -71,8 +71,8 @@ void raycasting(t_vars *vars)
      double ray_angle = vars->player->angle - (FOV_ANGLE / 2);
      int x = 0;
 
-    draw_ceiling(vars, 0x87CEEB);
-    draw_floor(vars,0xFFA54F);
+    draw_ceiling(vars, vars->map->color_c);
+    draw_floor(vars,vars->map->color_f);
     
     mlx_put_image_to_window(vars->mlx->mlx_ptr,vars->mlx->win_ptr, vars->data->img, 0,0);
      

@@ -79,5 +79,7 @@ int parsing(char *str,t_map_size *map_info)
     check_content_order(map_info);
     get_map_textures(map_info);
     get_map(map_info);
+    check_map(map_info);
+    printf("exit suc\n");
     return 0;
 }

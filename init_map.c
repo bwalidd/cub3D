@@ -44,10 +44,17 @@ void draw_mlx_map( t_vars *vars ,t_mlx *g_mlx, t_map_size *map_info)
     (void)vars;
     int i = 0;
     int j = 0;
+   
+    while(map_info->map[i])
+    {
+        printf("=--%s--=\n",map_info->map[i++]);
+    }
+    printf("=========tttt==\n");
+    i = 0;
     while (i < map_info->num_of_lines) 
     {
         j = 0;
-        while (j < map_info->number_horizontal) 
+        while (j < ft_strlen(map_info->map[i])) 
         {
             if (map_info->map[i][j] == 49) 
             {
