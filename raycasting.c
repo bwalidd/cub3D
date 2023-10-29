@@ -94,7 +94,7 @@ char	check_north_west(double w_y, double w_x, t_vars *vars)
 
 char	check_north_east(double w_y, double w_x, t_vars *vars)
 {
-	if ((int)(w_y + 1) % 50 == 0 && vars->map->map[(int)((w_y / 50.0) + 1)][(int)(w_x / 50.0)] == '0')
+	if ((int)(w_y + 0.05) % 50 == 0 && vars->map->map[(int)((w_y / 50.0) + 0.05)][(int)(w_x / 50.0)] == '0')
 	{
 		vars->player->where = w_x;
 		return ('N');
@@ -108,7 +108,7 @@ char	check_north_east(double w_y, double w_x, t_vars *vars)
 
 char	check_south_east(double w_y, double w_x, t_vars *vars)
 {
-	if ((int)(w_y) % 50 == 0 && vars->map->map[(int)((w_y / 50.0) - 1)][(int)(w_x / 50.0)] == '0')
+	if ((int)(w_y) % 50 == 0 && vars->map->map[(int)((w_y / 50.0) - 0.05)][(int)(w_x / 50.0)] == '0')
 	{
 		vars->player->where = w_x;
 		return ('S');
@@ -123,7 +123,7 @@ char	check_south_east(double w_y, double w_x, t_vars *vars)
 
 char	check_south_west(double w_y, double w_x, t_vars *vars)
 {
-	if ((int)(w_y) % 50 == 0 && vars->map->map[(int)((w_y / 50.0) - 1)][(int)(w_x / 50.0)] == '0')
+	if ((int)(w_y) % 50 == 0 && vars->map->map[(int)((w_y / 50.0) - 0.05)][(int)(w_x / 50.0)] == '0')
 	{
 		vars->player->where = w_x;
 		return ('S');
@@ -189,7 +189,6 @@ void raycasting(t_vars *vars)
                 double wall_height = (TILE_SIZE * WIN_HEIGHT) / corrected_distance;
                 int column_x = x;
                 vars->player->dir = set_directions(ray_y,ray_x,vars);
-                vars->player->where = (int)(vars->player->where * (1000.0 / 60.0)) % 1000;
                 mlx_draw_vertical_line(vars, column_x, (WIN_HEIGHT - wall_height) / 2, wall_height, vars->player->dir);
 
                 break;
