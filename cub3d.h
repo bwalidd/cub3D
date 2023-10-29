@@ -35,7 +35,7 @@
 #define WIN_HEIGHT 700
 #define TILE_SIZE 50
 #define FOV_ANGLE 60
-#define PLAYER_SPEED 10.0
+#define PLAYER_SPEED 15.0
 
 # define NUM_RAYS WINDOW_WIDTH
 
@@ -74,12 +74,27 @@ typedef struct s_mlx
 } t_mlx;
 
 typedef struct s_player {
+
+    int		x_m;
+	int		y_m;
+    double	distance;
+    char		dir;
     int   x ;
     int   y ;
-    int      dir;
+    int    x_step;
+    int    y_step;
+    double where;
     float    pixel_x;
     float    pixel_y;
     double   angle;
+    int move_forward;
+    int move_backward;
+    int turn_left;
+    int turn_right;
+    int slide_r;
+    int slide_l;
+    int x_mouse;
+    int y_mouse;
 } t_player;
 
 typedef struct s_vars {
@@ -93,10 +108,10 @@ void raycasting(t_vars *vars);
 void init_window(t_mlx *g_mlx,t_map_size *map_info, t_data *data);
 void draw_mlx_map( t_vars *vars ,t_mlx *g_mlx, t_map_size *map_info);
 void init_player(t_player *player, t_map_size *infos, t_mlx *g_mlx);
-void init_player_pos(char **map, t_player *player, t_mlx *g_mlx, t_map_size *infos);
+void    init_player_pos(char **map,t_player *player,t_mlx *g_mlx,t_map_size *infos , t_vars *vars);
 void draw_player(t_mlx *g_mlx, t_player *player);
 void update_player(t_mlx *g_mlx, t_player *player);
-int key_press_hook(int keycode, t_vars *vars);
+int moving(t_vars *vars);
 void my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void draw_rect(t_mlx *g_mlx, int x, int y, int width, int height, int color);
 int get_file_extension(char *str);

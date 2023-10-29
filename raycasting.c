@@ -52,21 +52,108 @@ void draw_floor(t_vars *vars, int color)
 }
 
 
-void mlx_draw_vertical_line(t_vars *vars, int x, int y, int height, int color)
+void mlx_draw_vertical_line(t_vars *vars, int x, int y, int height, char dir)
 {
+    int color;
+
+    // Set color based on the direction
+    if (dir == 'N') {
+        color = 0xFF0000; // Red
+    } else if (dir == 'E') {
+        color = 0x00FF00; // Green
+    } else if (dir == 'S') {
+        color = 0x0000FF; // Blue
+    } else if (dir == 'W') {
+        color = 0xFFFF00; // Yellow
+    } else {
+        color = 0xFFFFFF; // Default color (e.g., white) for unknown directions
+    }
+
     int i = 0;
     while (i < height) 
     {
-        //mlx_pixel_put(vars->mlx->mlx_ptr, vars->mlx->win_ptr, x, y + i, color);
-            my_mlx_pixel_put(vars->data,x,y + i,color);
-            i++;
+        my_mlx_pixel_put(vars->data, x, y + i, color);
+        i++;
     }
+}
+
+
+char	check_north_west(double w_y, double w_x, t_vars *vars)
+{
+	if ((int)(w_y + 1) % 50 == 0 && vars->map->map[(int)(w_y / 50.0) + 1][(int)(w_x / 50.0)] == '0')
+	{
+		vars->player->where = w_x;
+		return ('N');
+	}
+	else
+	{
+		vars->player->where = w_y;
+		return ('W');
+	}
+}
+
+char	check_north_east(double w_y, double w_x, t_vars *vars)
+{
+	if ((int)(w_y + 1) % 50 == 0 && vars->map->map[(int)((w_y / 50.0) + 1)][(int)(w_x / 50.0)] == '0')
+	{
+		vars->player->where = w_x;
+		return ('N');
+	}
+	else
+	{
+		vars->player->where = w_y;
+		return ('E');
+	}
+}
+
+char	check_south_east(double w_y, double w_x, t_vars *vars)
+{
+	if ((int)(w_y) % 50 == 0 && vars->map->map[(int)((w_y / 50.0) - 1)][(int)(w_x / 50.0)] == '0')
+	{
+		vars->player->where = w_x;
+		return ('S');
+	}
+	else
+	{
+		vars->player->where = w_y;
+		return ('E');
+	}
+}
+
+
+char	check_south_west(double w_y, double w_x, t_vars *vars)
+{
+	if ((int)(w_y) % 50 == 0 && vars->map->map[(int)((w_y / 50.0) - 1)][(int)(w_x / 50.0)] == '0')
+	{
+		vars->player->where = w_x;
+		return ('S');
+	}
+	else
+	{
+		vars->player->where = w_y;
+		return ('W');
+	}
+}
+
+
+char	set_directions(double w_y, double w_x, t_vars *vars)
+{
+	if (vars->player->pixel_y > w_y && vars->player->pixel_x > w_x)
+		return (check_north_west(w_y, w_x, vars));
+    else if (vars->player->pixel_y > w_y && vars->player->pixel_x < w_x)
+		return (check_north_east(w_y, w_x, vars));
+    else if (vars->player->pixel_y <= w_y && vars->player->pixel_x <= w_x)
+	 	return (check_south_east(w_y, w_x, vars));
+	else if (vars->player->pixel_y <= w_y && vars->player->pixel_x >= w_x)
+	 	return (check_south_west(w_y, w_x, vars));
+	 return (0);
 }
 
 void raycasting(t_vars *vars)
 {
      double player_x = vars->player->x;
      double player_y = vars->player->y;
+     vars->player->dir = '\0';
     
      double ray_angle = vars->player->angle - (FOV_ANGLE / 2);
      int x = 0;
@@ -81,12 +168,10 @@ void raycasting(t_vars *vars)
          double ray_x = player_x;
          double ray_y = player_y;
          
-         //double ray_angle = vars->player->angle - (FOV_ANGLE / 2) + (x * FOV_ANGLE) / WIN_WIDTH;
-         
          while (1)
          {
-            ray_x = ray_x + cos(ray_angle * M_PI / 180) * 0.5;
-            ray_y = ray_y + sin(ray_angle * M_PI / 180) * 0.5;
+            ray_x = ray_x + cos(ray_angle * M_PI / 180) * 0.05;
+            ray_y = ray_y + sin(ray_angle * M_PI / 180) * 0.05;
 
              int map_x = (int)(ray_x / TILE_SIZE);
              int map_y = (int)(ray_y / TILE_SIZE);
@@ -96,17 +181,16 @@ void raycasting(t_vars *vars)
 
            if (vars->map->map[map_y][map_x] == 49) // imagine
             {
-                
                 double delta_x = ray_x - player_x;
                 double delta_y = ray_y - player_y;
 
                 double distance_to_wall = sqrt(delta_x * delta_x + delta_y * delta_y);
                 double corrected_distance = distance_to_wall * cos((ray_angle - vars->player->angle) * (M_PI / 180));
                 double wall_height = (TILE_SIZE * WIN_HEIGHT) / corrected_distance;
-
                 int column_x = x;
-                
-                mlx_draw_vertical_line(vars, column_x, (WIN_HEIGHT - wall_height) / 2, wall_height, 0x660000);
+                vars->player->dir = set_directions(ray_y,ray_x,vars);
+                vars->player->where = (int)(vars->player->where * (1000.0 / 60.0)) % 1000;
+                mlx_draw_vertical_line(vars, column_x, (WIN_HEIGHT - wall_height) / 2, wall_height, vars->player->dir);
 
                 break;
             }
