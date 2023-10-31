@@ -66,10 +66,52 @@ typedef struct s_map_size
 
 typedef struct s_mlx
 {
+
+    void *mlx_ptrs;
+    void *win_ptrs;
+
+
     void *mlx_ptr;
     void *win_ptr;
     int bits_per_pixel;
+    char *north_img;
+    char *south_img;
+    char *east_img;
+    char *west_img;
+    char *n_xpm;
+    char *s_xpm;
+    char *e_xpm;
+    char *w_xpm;
     int size_line;
+
+    int		bpp_n;
+	int		l_len_n;
+	int		endian_n;
+
+	int		bpp_s;
+	int		l_len_s;
+	int		endian_s;
+
+	int		bpp_w;
+	int		l_len_w;
+	int		endian_w;
+
+	int		bpp_e;
+	int		l_len_e;
+	int		endian_e;
+
+	int		bpp_c;
+	int		l_len_c;
+	int		endian_c;
+
+	char	*addr_n;
+	char	*addr_s;
+	char	*addr_w;
+	char	*addr_e;
+	char	*addr_c;
+    char    *color;
+    double corrected_distance;
+    double wall_height;
     int endian;
 } t_mlx;
 
@@ -133,4 +175,10 @@ void check_map(t_map_size *map_info);
 int check_chars(char c);
 int check_wall_expanded(char **map,int j);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
+void img_to_xpm(t_vars *vars);
+char *north_textures(t_vars *vars, int i);
+char *south_textures(t_vars *vars, int i);
+char *west_textures(t_vars *vars, int i);
+char *east_textures(t_vars *vars, int i);
+void display_image(t_vars *vars); // remove
 #endif

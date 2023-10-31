@@ -51,18 +51,9 @@ char **split_map(char *file)
 
 
 
-// void fill_map_info(t_map_size *map_info,char **av)
-// {
-//     int i = 0;
-//     map_info->map = split_map(av[1]);
-//     while (map_info->map[i])
-//         i++;
-//     map_info->num_of_lines = i;
-//     map_info->number_horizontal = (int)ft_strlen(map_info->map[0]);
-//     map_info->number_horizontal--;
-//     //map_info->map_height = i * TILE_SIZE;
-//     //map_info->map_width = map_info->number_horizontal * TILE_SIZE;
-// }
+
+
+
 
 int	key_press_hook(int key, t_vars *vars)
 {
@@ -149,6 +140,7 @@ int main(int ac, char **av)
     g_mlx = malloc(sizeof(t_mlx));
     vars->mlx = g_mlx;
     init_window(g_mlx,map_info,data);
+    img_to_xpm(vars); //
     init_player_pos(map_info->map, player,g_mlx,map_info,vars);
     draw_mlx_map(vars,g_mlx,map_info);
     raycasting(vars);
@@ -157,9 +149,9 @@ int main(int ac, char **av)
     mlx_hook(g_mlx->win_ptr, 17, 0, ft_cross, vars);
     mlx_hook(g_mlx->win_ptr, 6, 1L << 6, mouse_mv, vars);
     mlx_loop_hook(g_mlx->mlx_ptr,moving, vars);
-    //draw_mlx_map(vars,g_mlx,map_info);
-    //mlx_hook(g_mlx->win_ptr, 17, 1L << 17, custom_exit, vars);
-     //mlx_put_image_to_window(vars->mlx->mlx_ptr,vars->mlx->win_ptr, vars->data->img, 0,0);
+    //draw_mlx_map(vars,g_mlx,map_info);   // 
+    //mlx_hook(g_mlx->win_ptr, 17, 1L << 17, custom_exit, vars); // 
+     //mlx_put_image_to_window(vars->mlx->mlx_ptr,vars->mlx->win_ptr, vars->data->img, 0,0); //
     mlx_loop(g_mlx->mlx_ptr);
     return (0);
 }
