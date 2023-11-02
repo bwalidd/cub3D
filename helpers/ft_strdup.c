@@ -12,10 +12,10 @@
 
 #include "../cub3d.h"
 
-char *ft_strndup(char *s1, int n)
+char	*ft_strndup(char *s1, int n)
 {
-	char *p;
-	int i;
+	char	*p;
+	int		i;
 
 	i = 0;
 	p = calloc(ft_strlen(s1),sizeof(char));
@@ -25,7 +25,7 @@ char *ft_strndup(char *s1, int n)
 		i++;
 	}
 	p[i] = '\0';
-	return (p);	
+	return (p);
 }
 /*
 texture/npn0.xpm\n  17

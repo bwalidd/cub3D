@@ -24,11 +24,9 @@ int	ft_strlen(const char *s)
 
 char	*ft_strchr(const char *s, int c)
 {
-	//int		i;
 	char	c1;
 
 	c1 = (char)c;
-	//i = 0;
 	while (*s != '\0' && *s != c1)
 		s++;
 	if (*s == c1)

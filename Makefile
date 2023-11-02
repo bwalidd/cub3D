@@ -20,7 +20,7 @@ LINKS = -lmlx -framework OpenGL -framework AppKit
 
 SRC = main.c init_map.c init_player.c player_movements.c raycasting.c\
 	get_next_line/get_next_line.c get_next_line/get_next_line_utils.c\
-	parsing/parse_args.c parsing/parse_colors.c parsing/parse_map.c parsing/parse_map2.c\
+	parsing/parse_args.c parsing/parse_colors.c parsing/parse_map.c parsing/parse_map2.c parsing/parse_map3.c\
 	parsing/parse_texture.c parsing/parser.c\
 	helpers/ft_atoi.c helpers/ft_split.c helpers/ft_strdup.c helpers/ft_strncmp.c\
 	helpers/ft_strcmp.c helpers/ft_memcpy.c helpers/ft_isdigit.c textures.c
