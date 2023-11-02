@@ -44,6 +44,22 @@ static void	init_textures(t_map_size *map_info)
 	map_info->we_texture = NULL;
 }
 
+void	fill_textures(t_map_size *map_info, char **splitted)
+{
+	if (ft_strncmp(splitted[0], "NO", 2) == 0)
+		map_info->no_texture = ft_strndup(splitted[1],
+				ft_strlen(splitted[1]) - 2);
+	else if (ft_strncmp(splitted[0], "SO", 2) == 0)
+		map_info->so_texture = ft_strndup(splitted[1],
+				ft_strlen(splitted[1]) - 2);
+	else if (ft_strncmp(splitted[0], "WE", 2) == 0)
+		map_info->we_texture = ft_strndup(splitted[1],
+				ft_strlen(splitted[1]) - 2);
+	else if (ft_strncmp(splitted[0], "EA", 2) == 0)
+		map_info->ea_texture = ft_strndup(splitted[1],
+				ft_strlen(splitted[1]) - 2);
+}
+
 void	get_map_textures(t_map_size *map_info)
 {
 	char	**splitted;
@@ -54,18 +70,7 @@ void	get_map_textures(t_map_size *map_info)
 	while (i < 4)
 	{
 		splitted = ft_split(map_info->map_content[i], ' ');
-		if (ft_strncmp(splitted[0], "NO", 2) == 0)
-			map_info->no_texture = ft_strndup(splitted[1],
-					ft_strlen(splitted[1]) - 2);
-		else if (ft_strncmp(splitted[0], "SO", 2) == 0)
-			map_info->so_texture = ft_strndup(splitted[1],
-					ft_strlen(splitted[1]) - 2);
-		else if (ft_strncmp(splitted[0], "WE", 2) == 0)
-			map_info->we_texture = ft_strndup(splitted[1],
-					ft_strlen(splitted[1]) - 2);
-		else if (ft_strncmp(splitted[0], "EA", 2) == 0)
-			map_info->ea_texture = ft_strndup(splitted[1],
-					ft_strlen(splitted[1]) - 2);
+		fill_textures(map_info, splitted);
 		free(splitted);
 		i++;
 	}

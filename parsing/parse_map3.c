@@ -6,7 +6,7 @@
 /*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 00:15:01 by wbouwach          #+#    #+#             */
-/*   Updated: 2023/11/02 01:15:45 by wbouwach         ###   ########.fr       */
+/*   Updated: 2023/11/02 19:03:39 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,13 @@ int	get_num_of_lines(char **content)
 		|| content[i][0] == '1' || content[i][0] == '0'))
 		i++;
 	return (i - j);
+}
+
+void	fill_map(int count, t_map_size *map_info, int i, int j)
+{
+	if (count != map_info->num_of_lines - 1)
+		map_info->map[j] = ft_strndup(map_info->map_content[i],
+				ft_strlen(map_info->map_content[i]) - 2);
+	else
+		map_info->map[j] = ft_strdup(map_info->map_content[i]);
 }

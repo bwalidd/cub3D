@@ -23,7 +23,6 @@ int	check_wall(char **map, int i, int j)
 	return (1);
 }
 
-
 void	ft_puterror(char *str)
 {
 	int	i;

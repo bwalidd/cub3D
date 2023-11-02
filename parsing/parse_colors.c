@@ -42,6 +42,42 @@ int	count_splited(char **str)
 	return (i);
 }
 
+void	fill_f_color(t_map_size *map_info, int i, int j, int *colors_f)
+{
+	char	**splitted;
+
+	while (map_info->map_content[i][j] == ' ')
+		j++;
+	splitted = ft_split(map_info->map_content[i] + j, ',');
+	if (count_splited(splitted) == 3)
+	{
+		colors_f[0] = ft_atoi(splitted[0]);
+		colors_f[1] = ft_atoi(splitted[1]);
+		colors_f[2] = ft_atoi(splitted[2]);
+	}
+	else
+		ft_puterror("wrong , only 3 args needed\n");
+	free(splitted);
+}
+
+void	fill_c_color(t_map_size *map_info, int i, int j, int *colors_c)
+{
+	char	**splitted;
+
+	while (map_info->map_content[i][j] == ' ')
+		j++;
+	splitted = ft_split(map_info->map_content[i] + j, ',');
+	if (count_splited(splitted) == 3)
+	{
+		colors_c[0] = ft_atoi(splitted[0]);
+		colors_c[1] = ft_atoi(splitted[1]);
+		colors_c[2] = ft_atoi(splitted[2]);
+	}
+	else
+		ft_puterror("wrong , only 3 args needed\n");
+	free(splitted);
+}
+
 void	parse_color(t_map_size *map_info)
 {
 	int		i;
@@ -49,61 +85,24 @@ void	parse_color(t_map_size *map_info)
 	int		counted;
 	int		*colors_c;
 	int		*colors_f;
-	char	**splitted;
 
-	i = 0;
-	j = 1;
 	colors_f = malloc(sizeof(int) * 3);
 	colors_c = malloc(sizeof(int) * 3);
-	counted = 0;
-	while (map_info->map_content[i])
+	fill_vars(&i, &j, &counted);
+	while (map_info->map_content[++i])
 	{
 		if (ft_strncmp(map_info->map_content[i], "F", 1) == 0)
 		{
-			while (map_info->map_content[i][j] == ' ')
-				j++;
-			splitted = ft_split(map_info->map_content[i] + j, ',');
-			if (count_splited(splitted) == 3)
-			{
-				colors_f[0] = ft_atoi(splitted[0]);
-				colors_f[1] = ft_atoi(splitted[1]);
-				colors_f[2] = ft_atoi(splitted[2]);
-			}
-			else
-			{
-				write(2, "wrong , only 3 args needed\n", 28);
-				free(splitted);
-				exit (1);
-			}
-			free(splitted);
+			fill_f_color(map_info, i, j, colors_f);
 			counted++;
 		}
 		else if (ft_strncmp(map_info->map_content[i], "C", 1) == 0)
 		{
-			while (map_info->map_content[i][j] == ' ')
-				j++;
-			splitted = ft_split(map_info->map_content[i] + j, ',');
-			if (count_splited(splitted) == 3)
-			{
-				colors_c[0] = ft_atoi(splitted[0]);
-				colors_c[1] = ft_atoi(splitted[1]);
-				colors_c[2] = ft_atoi(splitted[2]);
-			}
-			else
-			{
-				write(2, "wrong , only 3 args needed\n", 28);
-				free(splitted);
-				exit (1);
-			}
-			free(splitted);
+			fill_c_color(map_info, i, j, colors_c);
 			counted++;
 		}
-		i++;
 	}
 	if (counted != 2)
-	{
-		write(2, "wrong color format\n", 20);
-		exit(1);
-	}
+		ft_puterror("wrong , only 3 args needed\n");
 	parse_color2(map_info, colors_c, colors_f);
 }

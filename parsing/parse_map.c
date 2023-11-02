@@ -73,7 +73,6 @@ void	check_map(t_map_size *map_info)
 	check_map_cadre(map_info);
 }
 
-
 void	allocate_spaces(t_map_size *map_info)
 {
 	int	i;
@@ -105,27 +104,22 @@ void	get_map(t_map_size *map_info)
 	int	count;
 
 	count = 0;
-	i = 0;
+	i = -1;
 	j = 0;
 	map_info->len_of_line = 0;
 	map_info->num_of_lines = get_num_of_lines(map_info->map_content);
-	printf("n o l = %d\n",map_info->num_of_lines);
 	map_info->map = malloc(sizeof(char *) * (map_info->num_of_lines + 1));
 	allocate_spaces(map_info);
-	while (map_info->map_content[i])
+	while (map_info->map_content[++i])
 	{
 		if (map_info->map_content[i][0] == ' '
 			|| map_info->map_content[i][0] == '1'
 			|| map_info->map_content[i][0] == '0')
 		{
-			if (count != map_info->num_of_lines - 1)
-				map_info->map[j] = ft_strndup(map_info->map_content[i],ft_strlen(map_info->map_content[i]) - 2);
-			else
-				map_info->map[j] = ft_strdup(map_info->map_content[i]);
+			fill_map(count, map_info, i, j);
 			count++;
 			j++;
 		}
-		i++;
 	}
 	map_info->map[j] = NULL;
 }
