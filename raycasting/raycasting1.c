@@ -6,7 +6,7 @@
 /*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 07:38:52 by ajeftani          #+#    #+#             */
-/*   Updated: 2023/11/02 10:24:26 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/11/02 12:18:10 by ajeftani         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	wall_hit(t_vars *vars)
 	int		map_x;
 	int		map_y;
 
-	vars->ray_angle = vars->player->angle - (FOV_ANGLE / 2);
+	ray_angle = vars->player->angle - (FOV_ANGLE / 2);
 	while (vars->x < WIN_WIDTH)
 	{
 		vars->ray_x = vars->player_x;
