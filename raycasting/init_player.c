@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-void check_direction_view(t_player *player, t_vars *vars,int i,int j)
+
+void	check_direction_view(t_player *player, t_vars *vars, int i, int j)
 {
 				player->x = j;
 				player->y = i;
@@ -20,6 +21,7 @@ void check_direction_view(t_player *player, t_vars *vars,int i,int j)
 				vars->player->x = vars->player->x * TILE_SIZE;
 				vars->player->y = vars->player->y * TILE_SIZE;
 }
+
 void	init_player_pos(char **map, t_player *player, t_vars *vars)
 {
 	int	i;
@@ -34,7 +36,7 @@ void	init_player_pos(char **map, t_player *player, t_vars *vars)
 			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'E'
 				|| map[i][j] == 'W')
 			{
-				check_direction_view(player,vars,i,j);
+				check_direction_view(player, vars, i, j);
 				player->dir = map[i][j];
 				map[i][j] = '0';
 			}

@@ -39,7 +39,6 @@ void	get_data_addr(t_vars *vars)
 			&vars->mlx->l_len_e, &vars->mlx->endian_e);
 }
 
-
 void	img_to_xpm(t_vars *vars)
 {
 	vars->mlx->north_img = vars->map->no_texture;
@@ -71,9 +70,9 @@ char	*north_textures(t_vars *vars, int i)
 	return (vars->mlx->color);
 }
 
-char *south_textures(t_vars *vars, int i)
+char	*south_textures(t_vars *vars, int i)
 {
-    int	x;
+	int	x;
 	int	y;
 
 	x = (int)round(vars->player->where);
@@ -83,35 +82,6 @@ char *south_textures(t_vars *vars, int i)
 	else
 		y = (int)round(i * (1000.0 / vars->mlx->wall_height)) % 1000;
 	vars->mlx->color = vars->mlx->addr_s + (y * vars->mlx->l_len_s + (x * 4));
-    return (vars->mlx->color);
+	return (vars->mlx->color);
 }
 
-char *west_textures(t_vars *vars, int i)
-{
-    int	x;
-	int	y;
-
-	x = (int)round(vars->player->where);
-	if (vars->mlx->wall_height > WIN_HEIGHT)
-		y = (int)(round)((i + (vars->mlx->wall_height - WIN_HEIGHT) / 2.0)
-				* (1000.0 / vars->mlx->wall_height)) % 1000;
-	else
-		y = (int)round(i * (1000.0 / vars->mlx->wall_height)) % 1000;
-	vars->mlx->color = vars->mlx->addr_w + (y * vars->mlx->l_len_w + (x * 4));
-    return (vars->mlx->color);
-}
-
-char *east_textures(t_vars *vars, int i)
-{
-    int	x;
-	int	y;
-
-	x = (int)round(vars->player->where);
-	if (vars->mlx->wall_height > WIN_HEIGHT)
-		y = (int)(round)((i + (vars->mlx->wall_height - WIN_HEIGHT) / 2.0)
-				* (1000.0 / vars->mlx->wall_height)) % 1000;
-	else
-		y = (int)round(i * (1000.0 / vars->mlx->wall_height)) % 1000;
-	vars->mlx->color = vars->mlx->addr_e + (y * vars->mlx->l_len_e + (x * 4));
-    return (vars->mlx->color);
-}

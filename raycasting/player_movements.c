@@ -25,17 +25,14 @@ void	draw_line(t_vars *vars, int playerx, int playery, int destx, int desty,
 	{
 		mlx_pixel_put(vars->mlx->mlx_ptr, vars->mlx->win_ptr, playerx, playery,
 			color);
-
 		if (playerx == destx && playery == desty)
 			break ;
-
 		int e2 = 2 * err;
 		if (e2 > -dy)
 		{
 			err -= dy;
 			playerx += sx;
 		}
-
 		if (e2 < dx)
 		{
 			err += dx;
@@ -84,6 +81,8 @@ int	moving(t_vars *vars)
 {
 	double	angle_rad;
 	int		distance_from_player;
+	int		dest_x;
+	int		dest_y;
 
 	if (vars->player->turn_left == 1)
 		vars->player->angle -= 5.0;
@@ -100,8 +99,8 @@ int	moving(t_vars *vars)
 	mlx_clear_window(vars->mlx->mlx_ptr, vars->mlx->win_ptr);
 	angle_rad = vars->player->angle * M_PI / 180;
 	distance_from_player = 50;
-	int dest_x = vars->player->x / 5 + distance_from_player * cos(angle_rad);
-	int dest_y = vars->player->y / 5 + distance_from_player * sin(angle_rad);
+	dest_x = vars->player->x / 5 + distance_from_player * cos(angle_rad);
+	dest_y = vars->player->y / 5 + distance_from_player * sin(angle_rad);
 	draw_ceiling(vars, vars->map->color_c);
 	draw_floor(vars, vars->map->color_f);
 	raycasting(vars);

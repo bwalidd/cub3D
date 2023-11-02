@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting1.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajeftani <ajeftani@student.42.fr>          +#+  +:+       +#+        */
+/*   By: wbouwach <wbouwach@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 07:38:52 by ajeftani          #+#    #+#             */
-/*   Updated: 2023/11/02 12:18:10 by ajeftani         ###   ########.fr       */
+/*   Updated: 2023/11/02 22:54:32 by wbouwach         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+int	check_the_map(char c)
+{
+	if (c == '\0' || c == '\n' || c == ' ' || c == 49)
+		return (1);
+	return (0);
+}
 
 void	wall_hit(t_vars *vars)
 {
@@ -29,10 +36,7 @@ void	wall_hit(t_vars *vars)
 			vars->ray_y = vars->ray_y + sin(ray_angle * M_PI / 180) * 0.05;
 			map_x = (int)(vars->ray_x / TILE_SIZE);
 			map_y = (int)(vars->ray_y / TILE_SIZE);
-			if (vars->map->map[map_y][map_x] == 49
-				|| vars->map->map[map_y][map_x] == '\0'
-				|| vars->map->map[map_y][map_x] == '\n'
-				|| vars->map->map[map_y][map_x] == ' ')
+			if (check_the_map(vars->map->map[map_y][map_x]))
 			{
 				vars->ray_angle = ray_angle;
 				draw_it(vars);

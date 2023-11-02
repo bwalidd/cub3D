@@ -20,8 +20,6 @@
 # include "mlx.h"
 # include <stdlib.h>
 # include "get_next_line/get_next_line.h"
-
-
 # define KEY_W 'w'
 # define KEY_S 's'
 # define KEY_A 'a'
@@ -31,13 +29,12 @@
 # define KEY_RIGHT 65363
 # define KEY_UP 65362
 # define KEY_ESC 53
-#define WIN_WIDTH 1000
-#define WIN_HEIGHT 700
-#define TILE_SIZE 50
-#define FOV_ANGLE 60
-#define PLAYER_SPEED 10.0
-#define WALL_DISTANCE_THRESHOLD 10.0 // Set your desired threshold
-
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 700
+# define TILE_SIZE 50
+# define FOV_ANGLE 60
+# define PLAYER_SPEED 10.0
+# define WALL_DISTANCE_THRESHOLD 10.0
 # define NUM_RAYS WINDOW_WIDTH
 
 typedef struct	s_data {
@@ -50,42 +47,40 @@ typedef struct	s_data {
 
 typedef struct s_map_size
 {
-    char **map;
-    char **map_content;
-    char *no_texture;
-    char *so_texture;
-    char *we_texture;
-    char *ea_texture;
-    int color_c;
-    int map_height;
-    int color_f;
-    int map_width;
-    int num_of_lines;
-    int len_of_line;
-    int number_horizontal;    
+	int		color_c;
+	int		map_height;
+	int		color_f;
+	int		map_width;
+	int		num_of_lines;
+	int		len_of_line;
+	int		number_horizontal;
+	char	**map;
+	char	**map_content;
+	char	*no_texture;
+	char	*so_texture;
+	char	*we_texture;
+	char	*ea_texture;
 } t_map_size;
 
 typedef struct s_mlx
 {
 
-    void *mlx_ptrs;
-    void *win_ptrs;
+	void	*mlx_ptrs;
+	void	*win_ptrs;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	char	*north_img;
+	char	*south_img;
+	char	*east_img;
+	char	*west_img;
+	char	*n_xpm;
+	char	*s_xpm;
+	char	*e_xpm;
+	char	*w_xpm;
+	int		bits_per_pixel;
+	int		size_line;
 
-
-    void *mlx_ptr;
-    void *win_ptr;
-    int bits_per_pixel;
-    char *north_img;
-    char *south_img;
-    char *east_img;
-    char *west_img;
-    char *n_xpm;
-    char *s_xpm;
-    char *e_xpm;
-    char *w_xpm;
-    int size_line;
-
-    int		bpp_n;
+	int		bpp_n;
 	int		l_len_n;
 	int		endian_n;
 
@@ -105,53 +100,53 @@ typedef struct s_mlx
 	char	*addr_s;
 	char	*addr_w;
 	char	*addr_e;
-    char    *color;
-    double corrected_distance;
-    double wall_height;
-    int endian;
+	char    *color;
+	double corrected_distance;
+	double wall_height;
+	int endian;
 } t_mlx;
 
 typedef struct s_player {
 
-    int		x_m;
+	int		x_m;
 	int		y_m;
-    double	distance;
-    char		dir;
-    int   x ;
-    int   y ;
-    int    x_step;
-    int    y_step;
-    double where;
-    float    pixel_x;
-    float    pixel_y;
-    double   angle;
-    int move_forward;
-    int move_backward;
-    int turn_left;
-    int turn_right;
-    int slide_r;
-    int slide_l;
-    int x_mouse;
-    int y_mouse;
+	double	distance;
+	char		dir;
+	int   x ;
+	int   y ;
+	int    x_step;
+	int    y_step;
+	double where;
+	float    pixel_x;
+	float    pixel_y;
+	double   angle;
+	int move_forward;
+	int move_backward;
+	int turn_left;
+	int turn_right;
+	int slide_r;
+	int slide_l;
+	int x_mouse;
+	int y_mouse;
 } t_player;
 
 typedef struct s_vars {
-    double player_x;
-    double player_y;
-    double delta_x;
-    double delta_y;
-    double ray_x;
-    double ray_y;
-    double ray_angle;
-    int x;
-    double	new_x;
+	double player_x;
+	double player_y;
+	double delta_x;
+	double delta_y;
+	double ray_x;
+	double ray_y;
+	double ray_angle;
+	int x;
+	double	new_x;
 	double	new_y;
 	int		map_x;
 	int		map_y;
-    t_data *data;
-    t_map_size *map;
-    t_mlx *mlx;
-    t_player *player;
+	t_data *data;
+	t_map_size *map;
+	t_mlx *mlx;
+	t_player *player;
 } t_vars;
 
 void raycasting(t_vars *vars);
