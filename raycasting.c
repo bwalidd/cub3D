@@ -77,11 +77,14 @@ void	mlx_draw_vertical_line(t_vars *vars, int x, int y, int height, char dir)
 			my_mlx_pixel_put(vars->data, x, y + i,
 				*(unsigned int *)north_textures(vars, i));
 		else if (dir == 'E') 
-			my_mlx_pixel_put(vars->data, x, y + i, 0xFF0000);
+			my_mlx_pixel_put(vars->data, x, y + i,
+				*(unsigned int *)east_textures(vars, i));
 		else if (dir == 'S')
-			my_mlx_pixel_put(vars->data, x, y + i, 0xFF00FF);
+			my_mlx_pixel_put(vars->data, x, y + i,
+				*(unsigned int *)south_textures(vars, i));
 		else if (dir == 'W')
-			my_mlx_pixel_put(vars->data, x, y + i, 0xFF0000);
+			my_mlx_pixel_put(vars->data, x, y + i,
+				*(unsigned int *)west_textures(vars, i));
 		else
 			my_mlx_pixel_put(vars->data, x, y + i, 0xFF0000);
 		i++;

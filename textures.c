@@ -71,44 +71,47 @@ char	*north_textures(t_vars *vars, int i)
 	return (vars->mlx->color);
 }
 
-// char *south_textures(t_vars *vars, int i)
-// {
-//     int x;
-//     int y;
+char *south_textures(t_vars *vars, int i)
+{
+    int	x;
+	int	y;
 
-//     x = (int)round(vars->player->where);
-//     if (vars->mlx->corrected_distance > WIN_HEIGHT)
-//         y = (int)(round)((i + (vars->mlx->corrected_distance - WIN_HEIGHT) / 2.0) * (1000.0 / vars->mlx->corrected_distance)) % 1000;   
-//     else
-//         y = (int)(round)((i + (WIN_HEIGHT - vars->mlx->corrected_distance) / 2.0) * (1000.0 / vars->mlx->corrected_distance)) % 1000;
-//     vars->mlx->color = vars->mlx->addr_s + (y * vars->mlx->l_len_s + x * (vars->mlx->bpp_s / 8));
-//     return (vars->mlx->color);
-// }
+	x = (int)round(vars->player->where);
+	if (vars->mlx->wall_height > WIN_HEIGHT)
+		y = (int)(round)((i + (vars->mlx->wall_height - WIN_HEIGHT) / 2.0)
+				* (1000.0 / vars->mlx->wall_height)) % 1000;
+	else
+		y = (int)round(i * (1000.0 / vars->mlx->wall_height)) % 1000;
+	vars->mlx->color = vars->mlx->addr_s + (y * vars->mlx->l_len_s + (x * 4));
+    return (vars->mlx->color);
+}
 
-// char *west_textures(t_vars *vars, int i)
-// {
-//     int x;
-//     int y;
+char *west_textures(t_vars *vars, int i)
+{
+    int	x;
+	int	y;
 
-//     x = (int)round(vars->player->where);
-//     if (vars->mlx->corrected_distance > WIN_HEIGHT)
-//         y = (int)(round)((i + (vars->mlx->corrected_distance - WIN_HEIGHT) / 2.0) * (1000.0 / vars->mlx->corrected_distance)) % 1000;   
-//     else
-//         y = (int)(round)((i + (WIN_HEIGHT - vars->mlx->corrected_distance) / 2.0) * (1000.0 / vars->mlx->corrected_distance)) % 1000;
-//     vars->mlx->color = vars->mlx->addr_w + (y * vars->mlx->l_len_w + x * (vars->mlx->bpp_w / 8));
-//     return (vars->mlx->color);
-// }
+	x = (int)round(vars->player->where);
+	if (vars->mlx->wall_height > WIN_HEIGHT)
+		y = (int)(round)((i + (vars->mlx->wall_height - WIN_HEIGHT) / 2.0)
+				* (1000.0 / vars->mlx->wall_height)) % 1000;
+	else
+		y = (int)round(i * (1000.0 / vars->mlx->wall_height)) % 1000;
+	vars->mlx->color = vars->mlx->addr_w + (y * vars->mlx->l_len_w + (x * 4));
+    return (vars->mlx->color);
+}
 
-// char *east_textures(t_vars *vars, int i)
-// {
-//     int x;
-//     int y;
+char *east_textures(t_vars *vars, int i)
+{
+    int	x;
+	int	y;
 
-//     x = (int)round(vars->player->where);
-//     if (vars->mlx->corrected_distance > WIN_HEIGHT)
-//         y = (int)(round)((i + (vars->mlx->corrected_distance - WIN_HEIGHT) / 2.0) * (1000.0 / vars->mlx->corrected_distance)) % 1000;   
-//     else
-//         y = (int)(round)((i + (WIN_HEIGHT - vars->mlx->corrected_distance) / 2.0) * (1000.0 / vars->mlx->corrected_distance)) % 1000;
-//     vars->mlx->color = vars->mlx->addr_e + (y * vars->mlx->l_len_e + x * (vars->mlx->bpp_e / 8));
-//     return (vars->mlx->color);
-// }
+	x = (int)round(vars->player->where);
+	if (vars->mlx->wall_height > WIN_HEIGHT)
+		y = (int)(round)((i + (vars->mlx->wall_height - WIN_HEIGHT) / 2.0)
+				* (1000.0 / vars->mlx->wall_height)) % 1000;
+	else
+		y = (int)round(i * (1000.0 / vars->mlx->wall_height)) % 1000;
+	vars->mlx->color = vars->mlx->addr_e + (y * vars->mlx->l_len_e + (x * 4));
+    return (vars->mlx->color);
+}

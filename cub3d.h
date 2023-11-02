@@ -100,15 +100,10 @@ typedef struct s_mlx
 	int		l_len_e;
 	int		endian_e;
 
-	int		bpp_c;
-	int		l_len_c;
-	int		endian_c;
-
 	char	*addr_n;
 	char	*addr_s;
 	char	*addr_w;
 	char	*addr_e;
-	char	*addr_c;
     char    *color;
     double corrected_distance;
     double wall_height;
