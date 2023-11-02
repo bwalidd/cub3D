@@ -11,49 +11,6 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-/*
-
-// split map using get_next_line
-char **split_map(char *file)
-{
-	int fd;
-	char **map;
-	int nbr_of_line;
-	int i;
-
-	nbr_of_line = 0;
-	fd = open(file, O_RDONLY);
-	while (get_next_line(fd) != NULL)
-		nbr_of_line++;
-	//printf("nbr_of_line is %d\n",nbr_of_line);
-	close(fd);
-	map = (char **)malloc((nbr_of_line + 1) * sizeof(char *));
-	fd = open(file, O_RDONLY);
-	i = 0;
-	while (i < nbr_of_line)
-	{
-	   map[i] = get_next_line(fd);
-	  // map[i][ft_strlen(map[i] - 1)] = '\0';
-	   //printf("from top => %s",map[i]);
-	   i++;
-	}
-	map[i] = NULL;
-	close(fd);
-	i = 0;
-	//printf("===================\n");
-	while (i < nbr_of_line)
-	{
-	   //printf("from medium => %s",map[i]);
-	   i++;
-	}
-	return (map);
-}
-*/
-
-
-
-
-
 
 int	key_press_hook(int key, t_vars *vars)
 {
@@ -135,12 +92,11 @@ int	main(int ac, char **av)
 	vars->data = data;
 	vars->player = player;
 	vars->map = map_info;
-	vars->player->angle = 0;
 	g_mlx = malloc(sizeof(t_mlx));
 	vars->mlx = g_mlx;
-	init_window(g_mlx, map_info, data);
+	init_window(g_mlx,data);
 	img_to_xpm(vars);
-	init_player_pos(map_info->map, player, g_mlx, map_info, vars);
+	init_player_pos(map_info->map, player,vars);
 	draw_mlx_map(vars, g_mlx, map_info);
 	raycasting(vars);
 	mlx_hook(g_mlx->win_ptr, 2, 1L << 0, key_press_hook, vars);

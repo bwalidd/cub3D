@@ -35,7 +35,8 @@
 #define WIN_HEIGHT 700
 #define TILE_SIZE 50
 #define FOV_ANGLE 60
-#define PLAYER_SPEED 15.0
+#define PLAYER_SPEED 10.0
+#define WALL_DISTANCE_THRESHOLD 10.0 // Set your desired threshold
 
 # define NUM_RAYS WINDOW_WIDTH
 
@@ -135,6 +136,18 @@ typedef struct s_player {
 } t_player;
 
 typedef struct s_vars {
+    double player_x;
+    double player_y;
+    double delta_x;
+    double delta_y;
+    double ray_x;
+    double ray_y;
+    double ray_angle;
+    int x;
+    double	new_x;
+	double	new_y;
+	int		map_x;
+	int		map_y;
     t_data *data;
     t_map_size *map;
     t_mlx *mlx;
@@ -142,10 +155,10 @@ typedef struct s_vars {
 } t_vars;
 
 void raycasting(t_vars *vars);
-void init_window(t_mlx *g_mlx,t_map_size *map_info, t_data *data);
+void init_window(t_mlx *g_mlx,t_data *data);
 void draw_mlx_map( t_vars *vars ,t_mlx *g_mlx, t_map_size *map_info);
 void init_player(t_player *player, t_map_size *infos, t_mlx *g_mlx);
-void    init_player_pos(char **map, t_player *player, t_mlx *g_mlx, t_map_size *infos, t_vars *vars);
+void    init_player_pos(char **map, t_player *player,t_vars *vars);
 void draw_player(t_mlx *g_mlx, t_player *player);
 void update_player(t_mlx *g_mlx, t_player *player);
 int moving(t_vars *vars);
@@ -183,4 +196,14 @@ void display_image(t_vars *vars); // remove
 void	check_is_closed(char **map, int i);
 void	ft_puterror(char *str);
 void	check_is_surrounded_by_wall(char **map, int i);
+void go_ahead(t_vars *vars);
+void go_back(t_vars *vars);
+void slide_right(t_vars *vars);
+void slide_left(t_vars *vars);
+void draw_it(t_vars *vars);
+void wall_hit(t_vars *vars);
+char	check_north_west(double w_y, double w_x, t_vars *vars);
+char	check_north_east(double w_y, double w_x, t_vars *vars);
+char	check_south_east(double w_y, double w_x, t_vars *vars);
+char	check_south_west(double w_y, double w_x, t_vars *vars);
 #endif
