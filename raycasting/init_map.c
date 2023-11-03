@@ -22,11 +22,13 @@ void	init_window(t_mlx *g_mlx, t_data *data)
 			&data->line_length, &data->endian);
 }
 
-void	draw_rect(t_mlx *g_mlx, int x, int y, int width, int height, int color)
+void	draw_rect(t_mlx *g_mlx, int x, int y, int width)
 {
 	int	i;
 	int	j;
+	int	height;
 
+	height = TILE_SIZE / 5;
 	i = x;
 	while (i < x + width)
 	{
@@ -35,7 +37,7 @@ void	draw_rect(t_mlx *g_mlx, int x, int y, int width, int height, int color)
 		{
 			if (i >= 0)
 			{
-				mlx_pixel_put(g_mlx->mlx_ptr, g_mlx->win_ptr, i, j, color);
+				mlx_pixel_put(g_mlx->mlx_ptr, g_mlx->win_ptr, i, j, g_mlx->col);
 			}
 			j++;
 		}
@@ -58,13 +60,15 @@ void	draw_mlx_map(t_vars *vars, t_mlx *g_mlx, t_map_size *map_info)
 		{
 			if (map_info->map[i][j] == 49)
 			{
+				g_mlx->col = 0x008000;
 				draw_rect(g_mlx, j * TILE_SIZE / 5, i * TILE_SIZE / 5, TILE_SIZE
-					/ 5, TILE_SIZE / 5, 0x00FF00);
+					/ 5);
 			}
 			j++;
 		}
 		i++;
 	}
+	g_mlx->col = 0xFFF000;
 	draw_rect(g_mlx, vars->player->pixel_x / 5 - 5, vars->player->pixel_y / 5
-		- 5, TILE_SIZE / 5, TILE_SIZE / 5, 0xFFFF00);
+		- 5, TILE_SIZE / 5);
 }

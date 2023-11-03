@@ -84,4 +84,3 @@ char	*south_textures(t_vars *vars, int i)
 	vars->mlx->color = vars->mlx->addr_s + (y * vars->mlx->l_len_s + (x * 4));
 	return (vars->mlx->color);
 }
-

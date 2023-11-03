@@ -18,7 +18,7 @@ char	*ft_strndup(char *s1, int n)
 	int		i;
 
 	i = 0;
-	p = calloc(ft_strlen(s1),sizeof(char));
+	p = calloc(ft_strlen(s1), sizeof(char));
 	while (i < n)
 	{
 		p[i] = s1[i];
