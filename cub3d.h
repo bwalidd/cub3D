@@ -164,7 +164,7 @@ void	draw_rect(t_mlx *g_mlx, int x, int y, int width);
 int		get_file_extension(char *str);
 void	fill_map(int count, t_map_size *map_info, int i, int j);
 int		parsing(char *str, t_map_size *map_info);
-void	parse_texture(t_map_size *map_info, int *i);
+void	parse_texture_and_color(t_map_size *map_info, int *i);
 void	parse_color(t_map_size *map_info);
 void	get_map_textures(t_map_size *map_info);
 void	get_map(t_map_size *map_info);

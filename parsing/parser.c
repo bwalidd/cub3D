@@ -65,7 +65,7 @@ static void	check_content_order(t_map_size *map_info)
 	int	i;
 
 	i = 0;
-	parse_texture(map_info, &i);
+	parse_texture_and_color(map_info, &i);
 	while (map_info->map_content[i]
 		&& ft_strcmp(map_info->map_content[i], "\n") == 0)
 		i++;
@@ -86,6 +86,5 @@ int	parsing(char *str, t_map_size *map_info)
 	get_map_textures(map_info);
 	get_map(map_info);
 	check_map(map_info);
-	printf("exit suc\n");
 	return (0);
 }
