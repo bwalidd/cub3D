@@ -68,16 +68,3 @@ int	moving(t_vars *vars)
 	raycasting(vars);
 	return (0);
 }
-
-int	mouse_mv(int x, int y, t_vars *vars)
-{
-	if ((x >= 0 && x < WIN_WIDTH) && (y >= 0 && y < WIN_HEIGHT))
-	{
-		if (x > vars->player->x_mouse)
-			vars->player->angle += 5;
-		else
-			vars->player->angle -= 5;
-		vars->player->x_mouse = x;
-	}
-	return (0);
-}

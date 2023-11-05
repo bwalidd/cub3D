@@ -204,4 +204,5 @@ char	check_north_west(double w_y, double w_x, t_vars *vars);
 char	check_north_east(double w_y, double w_x, t_vars *vars);
 char	check_south_east(double w_y, double w_x, t_vars *vars);
 char	check_south_west(double w_y, double w_x, t_vars *vars);
+int		ft_cross(t_vars *vars);
 #endif

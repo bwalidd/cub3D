@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	key_press_hook(int key, t_vars *vars)
 {
@@ -30,6 +30,19 @@ int	key_press_hook(int key, t_vars *vars)
 	{
 		mlx_destroy_window(vars->mlx->mlx_ptr, vars->mlx->win_ptr);
 		exit(0);
+	}
+	return (0);
+}
+
+int	mouse_mv(int x, int y, t_vars *vars)
+{
+	if ((x >= 0 && x < WIN_WIDTH) && (y >= 0 && y < WIN_HEIGHT))
+	{
+		if (x > vars->player->x_mouse)
+			vars->player->angle += 5;
+		else
+			vars->player->angle -= 5;
+		vars->player->x_mouse = x;
 	}
 	return (0);
 }
@@ -62,6 +75,7 @@ void	ft_continue(t_mlx *g_mlx, t_vars *vars, t_map_size *map_info,
 	mlx_hook(g_mlx->win_ptr, 2, 1L << 0, key_press_hook, vars);
 	mlx_hook(g_mlx->win_ptr, 3, 1L << 1, relesse_key, vars);
 	mlx_hook(g_mlx->win_ptr, 17, 0, ft_cross, vars);
+	mlx_hook(g_mlx->win_ptr, 6, 1L << 6, mouse_mv, vars);
 	mlx_loop_hook(g_mlx->mlx_ptr, moving, vars);
 }
 

@@ -19,3 +19,10 @@ int	ft_isdigit(int c)
 	else
 		return (0);
 }
+
+int	ft_cross(t_vars *vars)
+{
+	mlx_destroy_window(vars->mlx->mlx_ptr, vars->mlx->win_ptr);
+	exit(0);
+	return (0);
+}
